@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const MEDIA = path.join(ROOT, "Media");
@@ -13,6 +14,35 @@ function copy(src, dest) {
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.copyFileSync(src, dest);
   console.log(`  ${path.relative(ROOT, src)} -> ${path.relative(ROOT, dest)}`);
+}
+
+// Some partner logos ship with a flat, uniform background baked in (a solid
+// card behind the mark) instead of real transparency. On our dark logo strip
+// that shows up as a visible rectangle. Chroma-key it out: sample the corner
+// color and fade anything close to it to transparent, with a soft ramp so
+// anti-aliased edges (e.g. a circular badge) don't get a hard cutout halo.
+async function copyChromaKeyed(src, dest, { lowThreshold = 18, highThreshold = 40 } = {}) {
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  const img = sharp(src);
+  const { data, info } = await img.raw().ensureAlpha().toBuffer({ resolveWithObject: true });
+  const { width, height, channels } = info;
+  const [cr, cg, cb] = [data[0], data[1], data[2]];
+
+  for (let i = 0; i < data.length; i += channels) {
+    const dr = data[i] - cr;
+    const dg = data[i + 1] - cg;
+    const db = data[i + 2] - cb;
+    const dist = Math.sqrt(dr * dr + dg * dg + db * db);
+    if (dist <= lowThreshold) {
+      data[i + 3] = 0;
+    } else if (dist < highThreshold) {
+      const t = (dist - lowThreshold) / (highThreshold - lowThreshold);
+      data[i + 3] = Math.round(data[i + 3] * t);
+    }
+  }
+
+  await sharp(data, { raw: { width, height, channels } }).png().toFile(dest);
+  console.log(`  ${path.relative(ROOT, src)} -> ${path.relative(ROOT, dest)} (chroma-keyed transparent)`);
 }
 
 console.log("Brand:");
@@ -27,17 +57,28 @@ copy(
 
 console.log("Partners:");
 const PARTNERS = path.join(MEDIA, "PARTNERS");
+
+// Plain copies — these already have real (or acceptably close-to-theme) transparency.
 const partnerMap = {
   "amazon.png": "Amazon-Prime-Video-Emblem.png",
   "tubi.png": "Tubi-Logo.png",
-  "boxbrazil.jpg": "Box Brazil.jpg",
-  "futuretoday.png": "ft-white-bg.png",
-  "digitalvirgo.png": "logo-digital-virgo-width-no-baseline.png",
+  "digitalvirgo.webp": "DV_Square_No-Baseline_white.webp",
   "hoopla.png": "hoopla-logo-blue copy.png",
-  "ottstudio.png": "OTT Studio logo 2.png",
 };
 for (const [destName, srcName] of Object.entries(partnerMap)) {
   copy(path.join(PARTNERS, srcName), path.join(PUBLIC, "partners", destName));
+}
+
+// Chroma-keyed copies — these ship with a flat solid background baked in
+// (navy / charcoal / near-black card behind the mark) that would otherwise
+// show as a visible rectangle now that logos render at full opacity.
+const chromaKeyMap = {
+  "boxbrazil.png": "Box Brazil 2.jpg",
+  "futuretoday.png": "ft-dark-bg.png",
+  "ottstudio.png": "OTT Studio logo.jpg",
+};
+for (const [destName, srcName] of Object.entries(chromaKeyMap)) {
+  await copyChromaKeyed(path.join(PARTNERS, srcName), path.join(PUBLIC, "partners", destName));
 }
 
 console.log("Production:");

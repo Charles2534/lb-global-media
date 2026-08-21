@@ -75,6 +75,14 @@ body {
   border-color: var(--line-on-paper);
 }
 
+/* Hover-only affordance, gated to devices that actually support hover (a
+   mouse/trackpad) so touch taps on mobile/tablet never trigger it. */
+@media (hover: hover) and (pointer: fine) {
+  .logo-hover:hover {
+    transform: scale(1.08);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
