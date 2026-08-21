@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./Container";
+import { MobileNav } from "./MobileNav";
 import { navLinks, site } from "@/lib/site";
 
 export function SiteHeader() {
@@ -18,7 +19,7 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -32,23 +33,12 @@ export function SiteHeader() {
 
         <Link
           href="/contact"
-          className="hidden shrink-0 items-center gap-2 rounded-full bg-paper px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-ink transition-opacity hover:opacity-90 sm:inline-flex"
+          className="hidden shrink-0 items-center gap-2 rounded-full bg-paper px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-ink transition-opacity hover:opacity-90 lg:inline-flex"
         >
           Get in Touch
         </Link>
-      </Container>
 
-      {/* Mobile nav */}
-      <Container className="flex gap-6 overflow-x-auto pb-4 md:hidden">
-        {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="shrink-0 font-mono text-xs uppercase tracking-widest text-paper/75"
-          >
-            {link.label}
-          </Link>
-        ))}
+        <MobileNav />
       </Container>
     </header>
   );
