@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { PillList } from "@/components/PillList";
@@ -226,12 +227,12 @@ export default function ProductionPage() {
             screen.
           </p>
           <div className="mt-10">
-            <a
-              href={`mailto:${site.email}`}
+            <Link
+              href="/contact?type=partnership"
               className="rounded-full bg-gradient-brand px-6 py-3 font-mono text-xs uppercase tracking-widest text-white transition-opacity hover:opacity-90"
             >
               Get in Touch
-            </a>
+            </Link>
           </div>
         </Container>
       </section>

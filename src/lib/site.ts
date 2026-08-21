@@ -9,6 +9,14 @@ export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/catalogue", label: "Catalogue & Titles" },
   { href: "/production", label: "Production & Partnerships" },
+  { href: "/contact", label: "Contact" },
+] as const;
+
+export const enquiryTypes = [
+  { value: "General", param: "general" },
+  { value: "Licensing", param: "licensing" },
+  { value: "Filmmaker Submission", param: "filmmaker" },
+  { value: "Partnership", param: "partnership" },
 ] as const;
 
 export const partners = [

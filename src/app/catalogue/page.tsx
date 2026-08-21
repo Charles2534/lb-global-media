@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { PillList } from "@/components/PillList";
@@ -103,14 +104,14 @@ export default function CataloguePage() {
             ))}
           </ul>
           <p className="mt-10 text-paper-foreground/80">
-            For interest in licensing our titles, please contact us at{" "}
-            <a
-              href={`mailto:${site.email}`}
+            For interest in licensing our titles, please{" "}
+            <Link
+              href="/contact?type=licensing"
               className="font-semibold text-gradient underline decoration-transparent hover:decoration-current"
             >
-              {site.email}
-            </a>
-            .
+              get in touch via our contact form
+            </Link>
+            , or email us directly at {site.email}.
           </p>
         </Container>
       </section>
@@ -132,14 +133,14 @@ export default function CataloguePage() {
           </div>
           <p className="mt-10 text-paper/80">
             If you own the rights to an individual short film or film
-            catalogue, we would be pleased to hear from you. Get in touch at{" "}
-            <a
-              href={`mailto:${site.email}`}
+            catalogue, we would be pleased to hear from you.{" "}
+            <Link
+              href="/contact?type=filmmaker"
               className="font-semibold text-gradient underline decoration-transparent hover:decoration-current"
             >
-              {site.email}
-            </a>
-            .
+              Get in touch via our contact form
+            </Link>
+            , or email us directly at {site.email}.
           </p>
         </Container>
       </section>

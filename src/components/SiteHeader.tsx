@@ -30,12 +30,12 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <a
-          href={`mailto:${site.email}`}
+        <Link
+          href="/contact"
           className="hidden shrink-0 items-center gap-2 rounded-full bg-paper px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-ink transition-opacity hover:opacity-90 sm:inline-flex"
         >
-          Contact
-        </a>
+          Get in Touch
+        </Link>
       </Container>
 
       {/* Mobile nav */}
@@ -49,12 +49,6 @@ export function SiteHeader() {
             {link.label}
           </Link>
         ))}
-        <a
-          href={`mailto:${site.email}`}
-          className="shrink-0 font-mono text-xs uppercase tracking-widest text-gradient"
-        >
-          Contact
-        </a>
       </Container>
     </header>
   );

@@ -198,12 +198,12 @@ export default function HomePage() {
             >
               Explore the Catalogue
             </Link>
-            <a
-              href={`mailto:${site.email}`}
+            <Link
+              href="/contact"
               className="rounded-full bg-gradient-brand px-6 py-3 font-mono text-xs uppercase tracking-widest text-white transition-opacity hover:opacity-90"
             >
               Get in Touch
-            </a>
+            </Link>
           </div>
         </Container>
       </section>
