@@ -11,10 +11,10 @@ export function SiteHeader() {
           <Image
             src="/brand/logo.png"
             alt={site.name}
-            width={160}
-            height={49}
+            width={184}
+            height={56}
             priority
-            className="h-9 w-auto"
+            className="h-14 w-auto"
           />
         </Link>
 
