@@ -156,44 +156,56 @@ export default function ProductionPage() {
           <SectionHeading
             index="(03)"
             eyebrow="Our International Footprint"
-            title="Europe, Asia & Latin America"
+            title="Europe, Asia, Latin America & North America"
             tone="paper"
           />
 
-          <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
-              <Image
-                src="/production/footprint-map.png"
-                alt="Map of LB Global Media's international footprint across Europe, Asia and Latin America"
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-contain"
-              />
-            </div>
+          {/* The clear visual focus of this section, sized generously but kept
+              within the page's normal content width rather than full-bleed. */}
+          <div className="relative mt-12 aspect-[3026/1290] w-full">
+            <Image
+              src="/production/footprint-map.png"
+              alt="Map of LB Global Media's international footprint across Europe, Asia, Latin America and North America, with core territories in London, Paris, Berlin, New York and Bangkok"
+              fill
+              sizes="(min-width: 1280px) 1280px, 100vw"
+              className="object-contain"
+              priority
+            />
+          </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-              <div>
-                <h3 className="font-display text-lg font-semibold">Europe</h3>
-                <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
-                  <li>France and UK-based operations with strong industry presence</li>
-                  <li>Production foothold in Spain and Catalonia</li>
-                  <li>Additional partners in Eastern Europe: Lithuania, Poland, and Serbia</li>
-                  <li>Exploring new opportunities in the Canary Islands, Belgium, Italy, and Ibermedia pathways</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-display text-lg font-semibold">Asia</h3>
-                <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
-                  <li>Established industry and local connections in Thailand</li>
-                  <li>Growing networks in Singapore, Japan, Indonesia, and Malaysia</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-display text-lg font-semibold">Latin America</h3>
-                <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
-                  <li>Strong networks with producers and filmmakers in Mexico, Colombia &amp; Brazil</li>
-                </ul>
-              </div>
+          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
+            <div>
+              <h3 className="font-display text-lg font-semibold">Europe</h3>
+              <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
+                <li>France and UK-based operations with strong industry presence</li>
+                <li>Production foothold in Spain and Catalonia</li>
+                <li>Additional partners in Eastern Europe: Lithuania, Poland, and Serbia</li>
+                <li>Exploring new opportunities in the Canary Islands, Belgium, Italy, and Ibermedia pathways</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-display text-lg font-semibold">Asia</h3>
+              <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
+                <li>Established industry and local connections in Thailand</li>
+                <li>Growing networks in Singapore, Japan, Indonesia, and Malaysia</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-display text-lg font-semibold">Latin America</h3>
+              <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
+                <li>Strong networks with producers and filmmakers in Mexico, Colombia &amp; Brazil</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-display text-lg font-semibold">North America</h3>
+              <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
+                <li>
+                  The United States is one of our three core licensing
+                  territories alongside the UK and Germany, with strong
+                  distribution reach through Amazon Prime and growing
+                  relationships with US-based producers and filmmakers.
+                </li>
+              </ul>
             </div>
           </div>
         </Container>
