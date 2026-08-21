@@ -1,0 +1,149 @@
+// One-off asset normalization: copies curated source assets from Media/ into public/,
+// and resolves each titles.csv row to its actual poster file regardless of naming.
+// Run manually with: node scripts/prepare-assets.mjs
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const MEDIA = path.join(ROOT, "Media");
+const PUBLIC = path.join(ROOT, "public");
+
+function copy(src, dest) {
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.copyFileSync(src, dest);
+  console.log(`  ${path.relative(ROOT, src)} -> ${path.relative(ROOT, dest)}`);
+}
+
+console.log("Brand:");
+copy(
+  path.join(MEDIA, "BRAND", "lb-global-media-gradient-1280x390.png"),
+  path.join(PUBLIC, "brand", "logo.png")
+);
+copy(
+  path.join(MEDIA, "BRAND", "lb-global-media-gradient-2560x780.png"),
+  path.join(PUBLIC, "brand", "logo-lg.png")
+);
+
+console.log("Partners:");
+const PARTNERS = path.join(MEDIA, "PARTNERS");
+const partnerMap = {
+  "amazon.png": "Amazon-Prime-Video-Emblem.png",
+  "tubi.png": "Tubi-Logo.png",
+  "boxbrazil.jpg": "Box Brazil.jpg",
+  "futuretoday.png": "ft-white-bg.png",
+  "digitalvirgo.png": "logo-digital-virgo-width-no-baseline.png",
+  "hoopla.png": "hoopla-logo-blue copy.png",
+  "ottstudio.png": "OTT Studio logo 2.png",
+};
+for (const [destName, srcName] of Object.entries(partnerMap)) {
+  copy(path.join(PARTNERS, srcName), path.join(PUBLIC, "partners", destName));
+}
+
+console.log("Production:");
+copy(
+  path.join(MEDIA, "PRODUCTION", "footprint-map.png"),
+  path.join(PUBLIC, "production", "footprint-map.png")
+);
+copy(
+  path.join(MEDIA, "PRODUCTION", "519000_IP.jpg"),
+  path.join(PUBLIC, "production", "masterclass-wide.jpg")
+);
+
+console.log("Home / masterclass photos:");
+const MASTERCLASS = path.join(
+  MEDIA,
+  "HOME",
+  "PHOTOS - IP IS YOUR ASSET 17th JAN 2026 MASTERCLASS"
+);
+const masterclassPicks = ["90000_IP.jpg", "650000_IP.jpg", "655000_IP.jpg"];
+masterclassPicks.forEach((name, i) => {
+  copy(path.join(MASTERCLASS, name), path.join(PUBLIC, "home", "masterclass", `photo-${i + 1}.jpg`));
+});
+
+console.log("Home / film stills:");
+const STILLS = path.join(MEDIA, "HOME", "Film stills");
+const stillsPicks = [
+  "Beyond Our End 1.png",
+  "From Her Bones 2.jpg",
+  "Tender Resistance 1.png",
+  "Where We Begin 3.png",
+  "Love Evolving - still 5.jpg",
+  "Sans Amour.png",
+  "FREAKS_SCOPE_0032.jpg",
+  "Remembering His Touch 9.jpg",
+];
+stillsPicks.forEach((name, i) => {
+  copy(path.join(STILLS, name), path.join(PUBLIC, "home", "stills", `still-${i + 1}${path.extname(name).toLowerCase()}`));
+});
+
+console.log("Titles: resolving posters...");
+const TITLES = path.join(MEDIA, "TITLES");
+const OTHER = path.join(TITLES, "Other Titles");
+
+// Slugs that have their own folder directly under Media/TITLES (poster.<ext>.<ext>)
+function firstFileIn(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const file = entries.find((e) => e.isFile());
+  return file ? path.join(dir, file.name) : null;
+}
+
+// Explicit overrides for slugs whose asset filenames don't match the slug at all,
+// or where multiple candidate posters exist (see README-assets.md for rationale).
+const explicitOverrides = {
+  "the-first-taste": path.join(OTHER, "The First Taste_Poster 2 (Amazon).png"),
+  "love-is-never-far": path.join(OTHER, "LOVE-IS-NEVER-FAR film - 1575x2100.png"),
+  "when-you-look-beneath-the-skin": path.join(OTHER, "WYLBTS 3.2 (1200x1600).jpg"),
+  "these-untold-secrets": path.join(OTHER, "THESE-UNTOLD-SECRETS_film-poster_1200X1600.jpg"),
+  "before-the-dawn-breaks": path.join(OTHER, "before-the-dawn", "BEFORE-THE-DAWN-BREAKS-AMAZON-1200x1600.png"),
+};
+
+function resolvePoster(slug) {
+  if (explicitOverrides[slug]) return explicitOverrides[slug];
+  const topLevel = path.join(TITLES, slug);
+  if (fs.existsSync(topLevel)) {
+    const f = firstFileIn(topLevel);
+    if (f) return f;
+  }
+  const otherLevel = path.join(OTHER, slug);
+  if (fs.existsSync(otherLevel)) {
+    const f = firstFileIn(otherLevel);
+    if (f) return f;
+  }
+  return null;
+}
+
+const csvRaw = fs.readFileSync(path.join(TITLES, "titles.csv"), "utf-8");
+// Minimal CSV split just to pull slugs (col 1) for this asset step; the app's real
+// parser (src/lib/titles.ts) handles quoting properly for actual field data.
+const lines = csvRaw.split(/\r?\n/).filter(Boolean);
+const slugs = new Set();
+for (let i = 1; i < lines.length; i++) {
+  const slug = lines[i].split(",")[0].trim();
+  if (slug) slugs.add(slug);
+}
+
+const missing = [];
+const manifest = {};
+for (const slug of slugs) {
+  const src = resolvePoster(slug);
+  if (!src) {
+    missing.push(slug);
+    continue;
+  }
+  const ext = path.extname(src).toLowerCase() || ".jpg";
+  copy(src, path.join(PUBLIC, "titles", slug, `poster${ext}`));
+  manifest[slug] = `/titles/${slug}/poster${ext}`;
+}
+
+fs.writeFileSync(
+  path.join(PUBLIC, "titles", "manifest.json"),
+  JSON.stringify(manifest, null, 2)
+);
+console.log(`Wrote poster manifest for ${Object.keys(manifest).length} slugs.`);
+
+if (missing.length) {
+  console.warn("\nWARNING: could not resolve a poster for:", missing.join(", "));
+} else {
+  console.log(`\nResolved posters for all ${slugs.size} unique title slugs.`);
+}

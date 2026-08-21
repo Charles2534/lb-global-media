@@ -1,0 +1,148 @@
+import type { Metadata } from "next";
+import { Container } from "@/components/Container";
+import { SectionHeading } from "@/components/SectionHeading";
+import { PillList } from "@/components/PillList";
+import { CatalogueBrowser } from "@/components/CatalogueBrowser";
+import { getAllGenres, getAllTitles } from "@/lib/titles";
+import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Catalogue & Titles",
+  description:
+    "Curated short-film anthologies from LB Global Media, spanning coming-of-age, LGBTQ+, horror, drama and sci-fi.",
+};
+
+const catalogueGenres = [
+  "Coming-of-Age",
+  "LGBTQ+",
+  "Horror",
+  "Drama",
+  "Sci-Fi",
+  "Black Cinema (coming soon)",
+];
+
+const partnerDeliverables = [
+  "Delivery-ready feature-length titles",
+  "Closed captions and English subtitles",
+  "Additional subtitle languages where available",
+  "Posters, trailers, key art and approved synopses",
+  "Clear rights and territory information",
+  "Flexible international licensing opportunities",
+  "Responsive delivery and partner support",
+];
+
+const filmmakerAudience = [
+  "Independent filmmakers",
+  "Producers and production companies",
+  "Sales agents and catalogue owners",
+  "Film schools and talent-development organisations",
+];
+
+export default function CataloguePage() {
+  const titles = getAllTitles();
+  const genres = getAllGenres();
+
+  return (
+    <>
+      <section className="border-b rule-on-dark pb-16 pt-16 sm:pt-24">
+        <Container>
+          <p className="font-mono text-xs uppercase tracking-widest text-paper/50">
+            Catalogue &amp; Titles
+          </p>
+          <h1 className="font-display mt-5 max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+            Curated Short Films.{" "}
+            <span className="text-gradient">Feature-Length Experiences.</span>
+          </h1>
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper/70">
+            {site.name} creates feature-length anthologies by bringing together
+            complementary short films around a shared genre, theme or audience.
+            Each anthology is carefully assembled to create a cohesive viewing
+            experience while preserving the identity and creative vision of
+            every film.
+          </p>
+          <p className="mt-6 max-w-2xl text-paper/60">
+            Our catalogue currently includes curated anthologies spanning
+            across:
+          </p>
+          <div className="mt-4">
+            <PillList items={catalogueGenres} />
+          </div>
+        </Container>
+      </section>
+
+      <section className="border-b rule-on-dark py-16">
+        <Container>
+          <p className="font-mono text-xs uppercase tracking-widest text-paper/50">
+            Browse Our Titles
+          </p>
+          <div className="mt-8">
+            <CatalogueBrowser titles={titles} genres={genres} />
+          </div>
+        </Container>
+      </section>
+
+      <section className="border-b rule-on-paper bg-paper py-24 text-paper-foreground">
+        <Container>
+          <SectionHeading
+            index="(01)"
+            eyebrow="For Platforms, Channel Partners & Buyers"
+            title="Built for Fast, Clean Delivery"
+            tone="paper"
+          />
+          <p className="mt-6 max-w-2xl text-paper-foreground/70">
+            We provide partners with:
+          </p>
+          <ul className="mt-6 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-2">
+            {partnerDeliverables.map((item) => (
+              <li
+                key={item}
+                className="rounded-lg border rule-on-paper px-4 py-3 text-sm text-paper-foreground/75"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-10 text-paper-foreground/80">
+            For interest in licensing our titles, please contact us at{" "}
+            <a
+              href={`mailto:${site.email}`}
+              className="font-semibold text-gradient underline decoration-transparent hover:decoration-current"
+            >
+              {site.email}
+            </a>
+            .
+          </p>
+        </Container>
+      </section>
+
+      <section className="py-24">
+        <Container>
+          <SectionHeading
+            index="(02)"
+            eyebrow="For Filmmakers & Rights-Holders"
+            title="Submit a Short, or a Catalogue"
+          />
+          <p className="mt-6 max-w-2xl text-paper/70">
+            We are seeking distinctive short films and established short-film
+            catalogues that align with our editorial focus. We welcome
+            submissions and partnership enquiries from:
+          </p>
+          <div className="mt-6">
+            <PillList items={filmmakerAudience} />
+          </div>
+          <p className="mt-10 text-paper/80">
+            If you own the rights to an individual short film or film
+            catalogue, we would be pleased to hear from you. Get in touch at{" "}
+            <a
+              href={`mailto:${site.email}`}
+              className="font-semibold text-gradient underline decoration-transparent hover:decoration-current"
+            >
+              {site.email}
+            </a>
+            .
+          </p>
+        </Container>
+      </section>
+    </>
+  );
+}
