@@ -110,10 +110,26 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* What drives us */}
+      <section className="border-b rule-on-paper bg-paper py-24 text-paper-foreground">
+        <Container>
+          <SectionHeading index="(01)" eyebrow="What Drives Us" title="Our Ethos" tone="paper" />
+          <div className="mt-14">
+            <NumberedList items={ethos} tone="paper" columns={3} />
+          </div>
+          <p className="font-display mt-16 max-w-3xl text-2xl leading-snug text-paper-foreground/80">
+            {site.name} is the evolution of{" "}
+            <span className="text-gradient">FilmDoo</span>, carrying forward a
+            decade-long legacy of global content acquisition and international
+            distribution expertise into a new, agile distribution model.
+          </p>
+        </Container>
+      </section>
+
       {/* Who we work with */}
       <section className="border-b rule-on-dark py-24">
         <Container>
-          <SectionHeading index="(01)" eyebrow="Who We Work With" title="Our Partners" />
+          <SectionHeading index="(02)" eyebrow="Who We Work With" title="Our Partners" />
           <div className="mt-10">
             <PillList items={[...partnerTypes]} />
           </div>
@@ -124,22 +140,6 @@ export default function HomePage() {
           <div className="mt-6">
             <LogoStrip />
           </div>
-        </Container>
-      </section>
-
-      {/* What drives us */}
-      <section className="border-b rule-on-paper bg-paper py-24 text-paper-foreground">
-        <Container>
-          <SectionHeading index="(02)" eyebrow="What Drives Us" title="Our Ethos" tone="paper" />
-          <div className="mt-14">
-            <NumberedList items={ethos} tone="paper" columns={3} />
-          </div>
-          <p className="font-display mt-16 max-w-3xl text-2xl leading-snug text-paper-foreground/80">
-            {site.name} is the evolution of{" "}
-            <span className="text-gradient">FilmDoo</span>, carrying forward a
-            decade-long legacy of global content acquisition and international
-            distribution expertise into a new, agile distribution model.
-          </p>
         </Container>
       </section>
 
