@@ -153,8 +153,8 @@ export default function HomePage() {
             tone="paper"
           />
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper-foreground/70">
-            We bring filmmakers, producers and industry professionals together
-            to exchange knowledge, build relationships and explore the changing
+            We engage with filmmakers, producers, and industry professionals to
+            exchange knowledge, build relationships, and explore the changing
             international content market.
           </p>
           <p className="font-display mt-6 text-xl font-semibold">
