@@ -9,8 +9,8 @@ import { getAllTitles } from "@/lib/titles";
 import { site } from "@/lib/site";
 
 // "An Artificial Life" (sci-fi compilation) isn't in the catalogue data yet —
-// add its slug here once it's been added to titles.csv.
-const featuredTitleSlugs = ["from-her-bones", "tender-resistance"];
+// swap it in for beyond-our-end once it's been added to titles.csv.
+const featuredTitleSlugs = ["from-her-bones", "tender-resistance", "beyond-our-end"];
 
 const ethos = [
   {
