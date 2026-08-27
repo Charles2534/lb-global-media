@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -157,46 +156,6 @@ export default function HomePage() {
           </p>
           <div className="mt-6">
             <LogoStrip />
-          </div>
-        </Container>
-      </section>
-
-      {/* Events & industry engagement */}
-      <section className="bg-paper py-24 text-paper-foreground">
-        <Container>
-          <SectionHeading
-            eyebrow="Events & Industry Engagement"
-            title="Building the Room, Not Just the Deal"
-            tone="paper"
-          />
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper-foreground/70">
-            We engage with filmmakers, producers, and industry professionals to
-            exchange knowledge, build relationships, and explore the changing
-            international content market.
-          </p>
-          <p className="font-display mt-6 text-xl font-semibold">
-            Film Business Masterclass: Content Is King, Distribution Is
-            Emperor, IP Is Your Asset
-            <span className="block text-base font-normal text-paper-foreground/60">
-              Bangkok — 17 January 2026
-            </span>
-          </p>
-
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="relative aspect-[4/3] overflow-hidden rounded-xl"
-              >
-                <Image
-                  src={`/home/masterclass/photo-${i}.jpg`}
-                  alt={`Film Business Masterclass, Bangkok, 17 January 2026 — photo ${i}`}
-                  fill
-                  sizes="(min-width: 640px) 33vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-            ))}
           </div>
         </Container>
       </section>

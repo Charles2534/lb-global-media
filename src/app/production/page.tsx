@@ -5,7 +5,10 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { PillList } from "@/components/PillList";
 import { NumberedList } from "@/components/NumberedList";
+import { EventGalleryLightbox } from "@/components/EventGalleryLightbox";
 import { site } from "@/lib/site";
+
+const eventPartners = ["Thai Media Fund", "Thai PBS", "Creative Economy Agency"];
 
 export const metadata: Metadata = {
   title: "Production & Global Partnerships",
@@ -214,6 +217,46 @@ export default function ProductionPage() {
           <div className="mt-14">
             <NumberedList items={whatWeBring} columns={2} />
           </div>
+        </Container>
+      </section>
+
+      <section className="border-b rule-on-paper bg-paper py-24 text-paper-foreground">
+        <Container>
+          <SectionHeading
+            eyebrow="Events & Industry Engagement"
+            title="Building the Room, Not Just the Deal"
+            tone="paper"
+          />
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper-foreground/70">
+            We engage with filmmakers, producers, and industry professionals to
+            exchange knowledge, build relationships, and explore the changing
+            international content market.
+          </p>
+          <p className="font-display mt-6 text-2xl font-semibold">
+            Film Business Masterclass: Content Is King, Distribution Is
+            Emperor, IP Is Your Asset
+            <span className="mt-1 block text-base font-normal text-paper-foreground/60">
+              Bangkok — 17 January 2026
+            </span>
+          </p>
+
+          <div className="mt-10">
+            <EventGalleryLightbox
+              photos={[1, 2, 3].map((i) => ({
+                src: `/home/masterclass/photo-${i}.jpg`,
+                alt: `Film Business Masterclass, Bangkok, 17 January 2026 — photo ${i}`,
+              }))}
+            />
+          </div>
+
+          <p className="mt-10 font-mono text-xs uppercase tracking-widest text-paper-foreground/50">
+            Event Partners
+          </p>
+          <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-sm text-paper-foreground/70">
+            {eventPartners.map((partner) => (
+              <li key={partner}>{partner}</li>
+            ))}
+          </ul>
         </Container>
       </section>
 
