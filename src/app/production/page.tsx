@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
-import { PillList } from "@/components/PillList";
+import { CardList } from "@/components/CardList";
 import { NumberedList } from "@/components/NumberedList";
 import { EventGalleryLightbox } from "@/components/EventGalleryLightbox";
 import { site } from "@/lib/site";
@@ -24,8 +24,11 @@ const focusAreas = [
   "Asian Voices",
   "Black Cinema & African Perspectives",
   "European Stories",
-  "Cultural Identity & Diaspora",
+  "Cultural Identity",
+  "Diaspora Tales",
   "Resilience and Human Connection",
+  "Animation",
+  "Transmedia",
 ];
 
 const formats = ["Feature films", "Vertical series & Microdramas", "Series", "Short Films"];
@@ -94,7 +97,7 @@ export default function ProductionPage() {
             travel across and transcend cultures. Our focus areas include:
           </p>
           <div className="mt-6">
-            <PillList items={focusAreas} tone="paper" />
+            <CardList items={focusAreas} tone="paper" />
           </div>
 
           <p className="mt-10 max-w-2xl text-paper-foreground/70">
@@ -103,7 +106,7 @@ export default function ProductionPage() {
             include:
           </p>
           <div className="mt-6">
-            <PillList items={formats} tone="paper" />
+            <CardList items={formats} tone="paper" />
           </div>
         </Container>
       </section>
@@ -161,8 +164,10 @@ export default function ProductionPage() {
           />
 
           {/* The clear visual focus of this section, sized generously but kept
-              within the page's normal content width rather than full-bleed. */}
-          <div className="relative mt-12 aspect-[3026/1290] w-full">
+              within the page's normal content width rather than full-bleed.
+              Hidden below sm — the map becomes too squashed to read at
+              phone widths, so the regional breakdown text carries it there. */}
+          <div className="relative mt-12 hidden aspect-[3026/1290] w-full sm:block">
             <Image
               src="/production/footprint-map.png"
               alt="Map of LB Global Media's international footprint across Europe, Asia, Latin America and North America, with core territories in London, Paris, Berlin, New York and Bangkok"
@@ -200,10 +205,8 @@ export default function ProductionPage() {
               <h3 className="font-display text-lg font-semibold">North America</h3>
               <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
                 <li>
-                  The United States is one of our three core licensing
-                  territories alongside the UK and Germany, with strong
-                  distribution reach through Amazon Prime and growing
-                  relationships with US-based producers and filmmakers.
+                  The US is a major licensing territory, with global partners
+                  such as Amazon and Tubi.
                 </li>
               </ul>
             </div>
