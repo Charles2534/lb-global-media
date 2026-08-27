@@ -16,9 +16,6 @@ export function SiteFooter() {
               height={49}
               className="h-8 w-auto"
             />
-            <p className="mt-4 max-w-xs text-sm text-paper/60">
-              {site.description}
-            </p>
           </div>
 
           <div className="flex flex-col gap-3 font-mono text-xs uppercase tracking-widest">
@@ -31,17 +28,13 @@ export function SiteFooter() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href={`mailto:${site.email}`}
-              className="text-paper/60 transition-colors hover:text-paper"
-            >
-              {site.email}
-            </a>
           </div>
 
           <div className="font-mono text-xs uppercase tracking-widest text-paper/40">
-            <p>United Kingdom &middot; France &middot; Thailand</p>
-            <p className="mt-2">&copy; {new Date().getFullYear()} {site.name}</p>
+            <p>LB Global Media is a trading name of Leydenbless Limited.</p>
+            <p className="mt-2">
+              &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
+            </p>
           </div>
         </div>
       </Container>
