@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { CardList } from "@/components/CardList";
 import { NumberedList } from "@/components/NumberedList";
 import { EventGalleryLightbox } from "@/components/EventGalleryLightbox";
+import { OctagonMedia } from "@/components/OctagonMedia";
 import { site } from "@/lib/site";
 
 const eventPartners = ["Thai Media Fund", "Thai PBS", "Creative Economy Agency"];
@@ -68,19 +69,27 @@ export default function ProductionPage() {
   return (
     <>
       <section className="border-b rule-on-dark pb-16 pt-16 sm:pt-24">
-        <Container>
-          <p className="font-mono text-xs uppercase tracking-widest text-paper/50">
-            Production &amp; Global Partnerships
-          </p>
-          <h1 className="font-display mt-5 max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
-            {site.name} as a{" "}
-            <span className="text-gradient">Global Co-Production Partner</span>
-          </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper/70">
-            Alongside curation and distribution, {site.name} develops and
-            supports selected productions and international co-productions
-            with the potential to connect with audiences across borders.
-          </p>
+        <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-widest text-paper/50">
+              Production &amp; Global Partnerships
+            </p>
+            <h1 className="font-display mt-5 max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+              {site.name} as a{" "}
+              <span className="text-gradient">Global Co-Production Partner</span>
+            </h1>
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper/70">
+              Alongside curation and distribution, {site.name} develops and
+              supports selected productions and international co-productions
+              with the potential to connect with audiences across borders.
+            </p>
+          </div>
+
+          <OctagonMedia
+            posterSrc="/home/stills/still-8.jpg"
+            alt="LB Global Media production showreel"
+            className="mx-auto w-full max-w-sm"
+          />
         </Container>
       </section>
 

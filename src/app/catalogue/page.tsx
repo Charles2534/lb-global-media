@@ -4,6 +4,7 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { PillList } from "@/components/PillList";
 import { CatalogueBrowser } from "@/components/CatalogueBrowser";
+import { OctagonMedia } from "@/components/OctagonMedia";
 import { getAllGenres, getAllTitles } from "@/lib/titles";
 import { site } from "@/lib/site";
 
@@ -46,28 +47,36 @@ export default function CataloguePage() {
   return (
     <>
       <section className="border-b rule-on-dark pb-16 pt-16 sm:pt-24">
-        <Container>
-          <p className="font-mono text-xs uppercase tracking-widest text-paper/50">
-            Catalogue &amp; Titles
-          </p>
-          <h1 className="font-display mt-5 max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
-            Curated Short Films.{" "}
-            <span className="text-gradient">Feature-Length Experiences.</span>
-          </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper/70">
-            {site.name} creates feature-length anthologies by bringing together
-            complementary short films around a shared genre, theme or audience.
-            Each anthology is carefully assembled to create a cohesive viewing
-            experience while preserving the identity and creative vision of
-            every film.
-          </p>
-          <p className="mt-6 max-w-2xl text-paper/60">
-            Our catalogue currently includes curated anthologies spanning
-            across:
-          </p>
-          <div className="mt-4">
-            <PillList items={catalogueGenres} />
+        <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-widest text-paper/50">
+              Catalogue &amp; Titles
+            </p>
+            <h1 className="font-display mt-5 max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+              Curated Short Films.{" "}
+              <span className="text-gradient">Feature-Length Experiences.</span>
+            </h1>
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper/70">
+              {site.name} creates feature-length anthologies by bringing together
+              complementary short films around a shared genre, theme or audience.
+              Each anthology is carefully assembled to create a cohesive viewing
+              experience while preserving the identity and creative vision of
+              every film.
+            </p>
+            <p className="mt-6 max-w-2xl text-paper/60">
+              Our catalogue currently includes curated anthologies spanning
+              across:
+            </p>
+            <div className="mt-4">
+              <PillList items={catalogueGenres} />
+            </div>
           </div>
+
+          <OctagonMedia
+            posterSrc="/home/stills/still-5.jpg"
+            alt="LB Global Media catalogue showreel"
+            className="mx-auto w-full max-w-sm"
+          />
         </Container>
       </section>
 

@@ -4,7 +4,7 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { NumberedList } from "@/components/NumberedList";
 import { LogoStrip } from "@/components/LogoStrip";
-import { StillsCollage } from "@/components/StillsCollage";
+import { OctagonMedia } from "@/components/OctagonMedia";
 import { getAllTitles } from "@/lib/titles";
 import { site } from "@/lib/site";
 
@@ -108,24 +108,10 @@ export default function HomePage() {
             </div>
           </div>
 
-          <StillsCollage
-            stills={[
-              {
-                src: "/home/stills/still-3.png",
-                alt: "Still from Tender Resistance",
-                className: "left-0 top-0 h-3/5 w-3/4 rotate-[-4deg]",
-              },
-              {
-                src: "/home/stills/still-4.png",
-                alt: "Still from Where We Begin",
-                className: "bottom-0 right-0 h-3/5 w-3/5 rotate-[3deg]",
-              },
-              {
-                src: "/home/stills/still-1.png",
-                alt: "Still from Beyond Our End",
-                className: "bottom-6 left-6 h-2/5 w-2/5 rotate-[-2deg] hidden sm:block",
-              },
-            ]}
+          <OctagonMedia
+            posterSrc="/home/stills/still-7.jpg"
+            alt="LB Global Media showreel"
+            className="mx-auto w-full max-w-md"
           />
         </Container>
       </section>
