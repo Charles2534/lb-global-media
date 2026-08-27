@@ -188,3 +188,55 @@ if (missing.length) {
 } else {
   console.log(`\nResolved posters for all ${slugs.size} unique title slugs.`);
 }
+
+console.log("\nTitles: resolving stills (up to 3 per title)...");
+
+// Folders whose name doesn't match the slug at all (mirrors the poster
+// overrides above, for the one slug that has a Stills folder to find).
+const folderNameOverrides = {
+  "before-the-dawn-breaks": path.join(OTHER, "before-the-dawn"),
+};
+
+function resolveTitleFolder(slug) {
+  if (folderNameOverrides[slug]) return folderNameOverrides[slug];
+  const topLevel = path.join(TITLES, slug);
+  if (fs.existsSync(topLevel)) return topLevel;
+  const otherLevel = path.join(OTHER, slug);
+  if (fs.existsSync(otherLevel)) return otherLevel;
+  return null;
+}
+
+function resolveStills(slug, max = 3) {
+  const folder = resolveTitleFolder(slug);
+  if (!folder) return [];
+  const entries = fs.readdirSync(folder, { withFileTypes: true });
+  const stillsDirEntry = entries.find((e) => e.isDirectory() && /^stills?$/i.test(e.name));
+  if (!stillsDirEntry) return [];
+  const stillsDir = path.join(folder, stillsDirEntry.name);
+  const files = fs
+    .readdirSync(stillsDir, { withFileTypes: true })
+    .filter((e) => e.isFile() && /\.(jpe?g|png|webp)$/i.test(e.name))
+    .map((e) => e.name)
+    .sort();
+  return files.slice(0, max).map((name) => path.join(stillsDir, name));
+}
+
+let titlesWithStills = 0;
+let titlesWithoutStills = [];
+for (const slug of slugs) {
+  const stillPaths = resolveStills(slug);
+  if (stillPaths.length === 0) {
+    titlesWithoutStills.push(slug);
+    continue;
+  }
+  titlesWithStills++;
+  stillPaths.forEach((src, i) => {
+    const ext = path.extname(src).toLowerCase() || ".jpg";
+    copy(src, path.join(PUBLIC, "titles", slug, "stills", `still-${i + 1}${ext}`));
+  });
+}
+
+console.log(`\nCopied stills for ${titlesWithStills} of ${slugs.size} title slugs.`);
+if (titlesWithoutStills.length) {
+  console.log("No stills available for:", titlesWithoutStills.join(", "));
+}

@@ -180,7 +180,7 @@ export default function HomePage() {
             {featuredTitles.map((title) => (
               <Link
                 key={title.slug}
-                href={`/catalogue#${title.slug}`}
+                href={`/catalogue/${title.slug}`}
                 className="group block"
               >
                 <div className="relative aspect-[2/3] w-full overflow-hidden rounded-2xl bg-ink-soft">
@@ -189,7 +189,7 @@ export default function HomePage() {
                     alt={`${title.title} poster`}
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-contain transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <h3 className="font-display mt-4 text-lg font-semibold">

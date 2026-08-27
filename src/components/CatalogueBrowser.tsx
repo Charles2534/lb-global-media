@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { Title } from "@/lib/titles";
+import { sortByReleaseDateDesc } from "@/lib/sortTitles";
 import { TitleCard } from "./TitleCard";
 
 export function CatalogueBrowser({
@@ -24,14 +25,14 @@ export function CatalogueBrowser({
   }, []);
 
   const filtered = useMemo(() => {
-    return titles
+    const results = titles
       .filter((t) => (activeGenre ? t.genres.includes(activeGenre) : true))
       .filter((t) =>
         query.trim()
           ? t.title.toLowerCase().includes(query.trim().toLowerCase())
           : true
-      )
-      .sort((a, b) => b.year - a.year);
+      );
+    return sortByReleaseDateDesc(results);
   }, [titles, query, activeGenre]);
 
   return (
@@ -48,15 +49,15 @@ export function CatalogueBrowser({
           />
         </label>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
           <button
             type="button"
             onClick={() => setActiveGenre(null)}
             aria-pressed={activeGenre === null}
-            className={`cursor-pointer rounded-full border px-3.5 py-1.5 font-mono text-xs uppercase tracking-wide transition-colors ${
+            className={`cursor-pointer font-mono text-xs uppercase tracking-wide transition-colors ${
               activeGenre === null
-                ? "border-paper bg-paper text-ink"
-                : "border-paper/20 text-paper/60 hover:border-paper/50"
+                ? "text-paper underline decoration-2 underline-offset-4"
+                : "text-paper/45 hover:text-paper/75"
             }`}
           >
             All
@@ -67,10 +68,10 @@ export function CatalogueBrowser({
               type="button"
               onClick={() => setActiveGenre(genre === activeGenre ? null : genre)}
               aria-pressed={activeGenre === genre}
-              className={`cursor-pointer rounded-full border px-3.5 py-1.5 font-mono text-xs uppercase tracking-wide transition-colors ${
+              className={`cursor-pointer font-mono text-xs uppercase tracking-wide transition-colors ${
                 activeGenre === genre
-                  ? "border-paper bg-paper text-ink"
-                  : "border-paper/20 text-paper/60 hover:border-paper/50"
+                  ? "text-paper underline decoration-2 underline-offset-4"
+                  : "text-paper/45 hover:text-paper/75"
               }`}
             >
               {genre}

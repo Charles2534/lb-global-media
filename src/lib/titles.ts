@@ -3,14 +3,21 @@ import path from "node:path";
 import { parse } from "csv-parse/sync";
 import posterManifest from "../../public/titles/manifest.json";
 
+// Titles whose licence has lapsed / are no longer being actively sold.
+// Charles supplies this list as titles come off-sale — the page and trailer
+// stay up, but any "watch to buy" link is suppressed for these slugs.
+const DELISTED_SLUGS = new Set<string>(["into-her-own"]);
+
 export type Title = {
   slug: string;
   title: string;
   poster: string;
+  stills: string[];
   logline: string;
   genres: string[];
   countries: string[];
   year: number;
+  releaseDate: string | null;
   runtime: string;
   trailerUrl: string;
   trailerYouTubeId: string | null;
@@ -20,6 +27,8 @@ export type Title = {
   subtitlesAvailable: string[];
   localizedVersions: string;
   licenceExpiry: string;
+  delisted: boolean;
+  amazonUrl: string | null;
 };
 
 type CsvRow = {
@@ -39,6 +48,8 @@ type CsvRow = {
   localized_versions: string;
   licence_expiry: string;
   poster_link_pcloud: string;
+  release_date: string;
+  amazon_url: string;
 };
 
 function splitList(value: string, separator: string): string[] {
@@ -51,6 +62,31 @@ function splitList(value: string, separator: string): string[] {
 function extractYouTubeId(url: string): string | null {
   const match = url.match(/(?:v=|youtu\.be\/)([\w-]{11})/);
   return match ? match[1] : null;
+}
+
+// Up to 3 stills live at public/titles/<slug>/stills/still-N.<ext> when the
+// source assets had a Stills folder for that title (see scripts/prepare-assets.mjs).
+function resolveStills(slug: string): string[] {
+  const dir = path.join(process.cwd(), "public", "titles", slug, "stills");
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter((name) => /^still-\d+\./i.test(name))
+    .sort()
+    .map((name) => `/titles/${slug}/stills/${name}`);
+}
+
+// No per-title Amazon/Tubi URLs exist in the source data — only a generic
+// where_to_watch platform name. Where that names Amazon, and no exact URL
+// has been supplied via the amazon_url column, fall back to an honest
+// amazon.com search link rather than fabricating a direct product URL.
+function resolveAmazonUrl(row: CsvRow, delisted: boolean): string | null {
+  if (delisted) return null;
+  const override = row.amazon_url.trim();
+  if (override) return override;
+  if (!row.where_to_watch.trim().toLowerCase().includes("amazon")) return null;
+  const query = encodeURIComponent(`${row.title.trim()} LB Global Media`);
+  return `https://www.amazon.com/s?k=${query}&i=instant-video`;
 }
 
 function parseCsv(): Title[] {
@@ -72,15 +108,18 @@ function parseCsv(): Title[] {
 
     const poster =
       (posterManifest as Record<string, string>)[slug] ?? "/titles/placeholder.png";
+    const delisted = DELISTED_SLUGS.has(slug);
 
     bySlug.set(slug, {
       slug,
       title: row.title.trim(),
       poster,
+      stills: resolveStills(slug),
       logline: row.logline.trim(),
       genres: splitList(row.genres, ";"),
       countries: splitList(row.countries, ","),
       year: Number.parseInt(row.year, 10),
+      releaseDate: row.release_date.trim() || null,
       runtime: row.runtime.trim(),
       trailerUrl: row.trailer_url.trim(),
       trailerYouTubeId: extractYouTubeId(row.trailer_url),
@@ -90,6 +129,8 @@ function parseCsv(): Title[] {
       subtitlesAvailable: splitList(row.subtitles_available, ","),
       localizedVersions: row.localized_versions.trim(),
       licenceExpiry: row.licence_expiry.trim(),
+      delisted,
+      amazonUrl: resolveAmazonUrl(row, delisted),
     });
   }
 
@@ -101,6 +142,10 @@ let cache: Title[] | null = null;
 export function getAllTitles(): Title[] {
   if (!cache) cache = parseCsv();
   return cache;
+}
+
+export function getTitleBySlug(slug: string): Title | undefined {
+  return getAllTitles().find((t) => t.slug === slug);
 }
 
 export function getAllGenres(): string[] {

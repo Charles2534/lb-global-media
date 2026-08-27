@@ -18,7 +18,7 @@ const catalogueGenres = [
   "LGBTQ+",
   "Horror",
   "Drama",
-  "Sci-Fi",
+  "Science Fiction",
   "Black Cinema (coming soon)",
 ];
 

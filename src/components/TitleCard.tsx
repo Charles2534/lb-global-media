@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Title } from "@/lib/titles";
 import { TrailerButton } from "./TrailerButton";
 
@@ -8,21 +9,26 @@ export function TitleCard({ title }: { title: Title }) {
       id={title.slug}
       className="group flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border border-paper/10 bg-paper/[0.03] transition-colors hover:border-paper/25"
     >
-      <div className="relative aspect-[2/3] w-full overflow-hidden bg-ink-soft">
+      <Link
+        href={`/catalogue/${title.slug}`}
+        className="relative block aspect-[2/3] w-full overflow-hidden bg-ink-soft"
+      >
         <Image
           src={title.poster}
           alt={`${title.title} poster`}
           fill
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-contain transition-transform duration-500 group-hover:scale-105"
         />
-      </div>
+      </Link>
 
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold leading-tight">
-            {title.title}
-          </h3>
+          <Link href={`/catalogue/${title.slug}`}>
+            <h3 className="font-display text-lg font-semibold leading-tight hover:underline">
+              {title.title}
+            </h3>
+          </Link>
           <span className="shrink-0 font-mono text-xs text-paper/50">{title.year}</span>
         </div>
 
@@ -61,7 +67,15 @@ export function TitleCard({ title }: { title: Title }) {
             ))}
           </div>
 
-          <TrailerButton youTubeId={title.trailerYouTubeId} title={title.title} />
+          <div className="flex flex-wrap gap-2">
+            <TrailerButton youTubeId={title.trailerYouTubeId} title={title.title} />
+            <Link
+              href={`/catalogue/${title.slug}`}
+              className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-paper/25 px-4 py-2 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-paper/60"
+            >
+              View Details
+            </Link>
+          </div>
         </div>
       </div>
     </article>
