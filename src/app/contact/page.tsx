@@ -32,7 +32,7 @@ export default async function ContactPage({
           </h1>
           <p className="mt-8 max-w-md text-lg leading-relaxed text-paper/70">
             Whether you&apos;re a platform interested in licensing a title, a
-            filmmaker with a short to submit, or a producer exploring a
+            filmmaker with a film to submit, or a producer exploring a
             co-production, we&apos;d like to hear from you.
           </p>
           <p className="mt-6 max-w-md text-paper/60">

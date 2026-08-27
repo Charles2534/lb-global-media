@@ -14,7 +14,7 @@ export const navLinks = [
 
 export const enquiryTypes = [
   { value: "General", param: "general" },
-  { value: "Licensing", param: "licensing" },
+  { value: "Licensing Opportunity", param: "licensing" },
   { value: "Filmmaker Submission", param: "filmmaker" },
   { value: "Partnership", param: "partnership" },
 ] as const;

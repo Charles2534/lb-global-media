@@ -25,6 +25,16 @@ export function ContactForm({ defaultType }: { defaultType: string }) {
       });
 
       if (!res.ok) throw new Error("Request failed");
+
+      // FormSubmit returns HTTP 200 even when the submission wasn't actually
+      // delivered (e.g. "this form needs activation") — the real result is
+      // in the JSON body, not the status code.
+      const result = await res.json();
+      if (result.success !== "true") {
+        console.error("FormSubmit did not deliver the message:", result);
+        throw new Error(result.message || "FormSubmit reported failure");
+      }
+
       setStatus("success");
       form.reset();
     } catch {
