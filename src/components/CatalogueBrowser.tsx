@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Title } from "@/lib/titles";
 import { TitleCard } from "./TitleCard";
 
@@ -13,6 +13,15 @@ export function CatalogueBrowser({
 }) {
   const [query, setQuery] = useState("");
   const [activeGenre, setActiveGenre] = useState<string | null>(null);
+
+  // The browser's native scroll-to-fragment can miss the target here, since
+  // this list finishes hydrating a moment after that first-paint scroll
+  // attempt. Do it ourselves once the real content is on the page.
+  useEffect(() => {
+    if (!window.location.hash) return;
+    const target = document.getElementById(window.location.hash.slice(1));
+    target?.scrollIntoView({ block: "start" });
+  }, []);
 
   const filtered = useMemo(() => {
     return titles

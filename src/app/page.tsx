@@ -1,10 +1,16 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { NumberedList } from "@/components/NumberedList";
 import { LogoStrip } from "@/components/LogoStrip";
 import { StillsCollage } from "@/components/StillsCollage";
+import { getAllTitles } from "@/lib/titles";
 import { site } from "@/lib/site";
+
+// "An Artificial Life" (sci-fi compilation) isn't in the catalogue data yet —
+// add its slug here once it's been added to titles.csv.
+const featuredTitleSlugs = ["from-her-bones", "tender-resistance"];
 
 const ethos = [
   {
@@ -43,6 +49,11 @@ const partnerTypes = [
 ];
 
 export default function HomePage() {
+  const allTitles = getAllTitles();
+  const featuredTitles = featuredTitleSlugs
+    .map((slug) => allTitles.find((t) => t.slug === slug))
+    .filter((t): t is NonNullable<typeof t> => Boolean(t));
+
   return (
     <>
       {/* Hero */}
@@ -156,6 +167,48 @@ export default function HomePage() {
           </p>
           <div className="mt-6">
             <LogoStrip />
+          </div>
+        </Container>
+      </section>
+
+      {/* Catalogue teaser */}
+      <section className="border-b rule-on-paper bg-paper py-24 text-paper-foreground">
+        <Container>
+          <SectionHeading eyebrow="From the Catalogue" title="Featured Titles" tone="paper" />
+
+          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredTitles.map((title) => (
+              <Link
+                key={title.slug}
+                href={`/catalogue#${title.slug}`}
+                className="group block"
+              >
+                <div className="relative aspect-[2/3] w-full overflow-hidden rounded-2xl bg-ink-soft">
+                  <Image
+                    src={title.poster}
+                    alt={`${title.title} poster`}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <h3 className="font-display mt-4 text-lg font-semibold">
+                  {title.title}
+                </h3>
+                <p className="mt-1 text-sm text-paper-foreground/60">
+                  {title.genres.join(" · ")}
+                </p>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-12">
+            <Link
+              href="/catalogue"
+              className="rounded-full bg-gradient-brand px-6 py-3 font-mono text-xs uppercase tracking-widest text-white transition-opacity hover:opacity-90"
+            >
+              See Full Catalogue
+            </Link>
           </div>
         </Container>
       </section>

@@ -4,7 +4,10 @@ import { TrailerButton } from "./TrailerButton";
 
 export function TitleCard({ title }: { title: Title }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-paper/10 bg-paper/[0.03] transition-colors hover:border-paper/25">
+    <article
+      id={title.slug}
+      className="group flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border border-paper/10 bg-paper/[0.03] transition-colors hover:border-paper/25"
+    >
       <div className="relative aspect-[2/3] w-full overflow-hidden bg-ink-soft">
         <Image
           src={title.poster}
