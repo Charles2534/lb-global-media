@@ -42,10 +42,6 @@ export default async function TitleDetailPage({
   const title = getTitleBySlug(slug);
   if (!title) notFound();
 
-  // The first still (when we have one) doubles as landscape key art for the
-  // banner up top; anything past that is shown as additional stills below.
-  const [keyArt, ...additionalStills] = title.stills;
-
   return (
     <>
       <section className="border-b rule-on-dark pb-8 pt-8 sm:pt-12">
@@ -53,20 +49,6 @@ export default async function TitleDetailPage({
           <BackToCatalogue />
         </Container>
       </section>
-
-      {keyArt && (
-        <div className="relative aspect-[21/9] w-full overflow-hidden bg-ink-soft">
-          <Image
-            src={keyArt}
-            alt={`${title.title} key art`}
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent" />
-        </div>
-      )}
 
       <section className="border-b rule-on-dark py-16">
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr]">
@@ -171,12 +153,12 @@ export default async function TitleDetailPage({
         </section>
       )}
 
-      {additionalStills.length > 0 && (
+      {title.stills.length > 0 && (
         <section className="border-b rule-on-dark py-16">
           <Container>
             <h2 className="font-display text-2xl font-semibold">Stills</h2>
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {additionalStills.map((src) => (
+              {title.stills.map((src) => (
                 <div
                   key={src}
                   className="relative aspect-[4/3] overflow-hidden rounded-xl bg-ink-soft"
