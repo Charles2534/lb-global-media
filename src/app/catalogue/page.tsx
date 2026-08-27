@@ -85,7 +85,6 @@ export default function CataloguePage() {
       <section className="border-b rule-on-paper bg-paper py-24 text-paper-foreground">
         <Container>
           <SectionHeading
-            index="(01)"
             eyebrow="For Platforms, Channel Partners & Buyers"
             title="Built for Fast, Clean Delivery"
             tone="paper"
@@ -119,7 +118,6 @@ export default function CataloguePage() {
       <section className="py-24">
         <Container>
           <SectionHeading
-            index="(02)"
             eyebrow="For Filmmakers & Rights-Holders"
             title="Submit a Short, or a Catalogue"
           />

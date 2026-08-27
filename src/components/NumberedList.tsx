@@ -14,7 +14,7 @@ export function NumberedList({
 }) {
   const ruleClass = tone === "dark" ? "rule-on-dark" : "rule-on-paper";
   const numberClass = tone === "dark" ? "text-paper/30" : "text-paper-foreground/30";
-  const bodyClass = tone === "dark" ? "text-paper/70" : "text-paper-foreground/70";
+  const bodyClass = tone === "dark" ? "text-paper/70" : "text-paper-foreground/85";
 
   const gridClass =
     columns === 3

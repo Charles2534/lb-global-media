@@ -1,11 +1,9 @@
 export function SectionHeading({
-  index,
   eyebrow,
   title,
   tone = "dark",
   align = "left",
 }: {
-  index?: string;
   eyebrow?: string;
   title: string;
   tone?: "dark" | "paper";
@@ -20,7 +18,6 @@ export function SectionHeading({
           align === "center" ? "justify-center" : ""
         }`}
       >
-        {index && <span className="text-gradient font-semibold">{index}</span>}
         {eyebrow && <span>{eyebrow}</span>}
       </div>
       <h2 className="font-display mt-3 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">

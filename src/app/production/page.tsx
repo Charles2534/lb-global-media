@@ -81,7 +81,6 @@ export default function ProductionPage() {
       <section className="border-b rule-on-paper bg-paper py-24 text-paper-foreground">
         <Container>
           <SectionHeading
-            index="(01)"
             eyebrow="What We Are Looking For"
             title="Distinctive Voices, International Potential"
             tone="paper"
@@ -109,7 +108,6 @@ export default function ProductionPage() {
       <section className="border-b rule-on-dark py-24">
         <Container>
           <SectionHeading
-            index="(02)"
             eyebrow="Regional Production & Talent Networks"
             title="A Multicultural Team, Across Three Continents"
           />
@@ -154,7 +152,6 @@ export default function ProductionPage() {
       <section className="border-b rule-on-paper bg-paper py-24 text-paper-foreground">
         <Container>
           <SectionHeading
-            index="(03)"
             eyebrow="Our International Footprint"
             title="Europe, Asia, Latin America & North America"
             tone="paper"
@@ -213,7 +210,7 @@ export default function ProductionPage() {
 
       <section className="border-b rule-on-dark py-24">
         <Container>
-          <SectionHeading index="(04)" eyebrow="What We Bring" title="Why Partner With Us" />
+          <SectionHeading eyebrow="What We Bring" title="Why Partner With Us" />
           <div className="mt-14">
             <NumberedList items={whatWeBring} columns={2} />
           </div>

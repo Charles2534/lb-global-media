@@ -29,6 +29,10 @@ const ethos = [
     title: "Responsible Innovation",
     body: "We embrace new technologies and models that empower creativity, production and distribution without losing creative control.",
   },
+  {
+    title: "Distribution-Minded",
+    body: "We believe every film deserves the right audience — our ethos isn't just to make or curate a film, but to help it find real distribution and reach paying audiences.",
+  },
 ];
 
 const partnerTypes = [
@@ -45,26 +49,33 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden border-b rule-on-dark pb-24 pt-16 sm:pt-24">
-        <Container className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
+        <Container className="grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div className="lg:col-span-2">
             <p className="font-mono text-xs uppercase tracking-widest text-paper/50">
               International Film Production &amp; Distribution
             </p>
-            <h1 className="font-display mt-5 text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="font-display mt-5 max-w-none text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
               Global Stories.
               <br />
               <span className="text-gradient">Curated, Produced</span>
               <br />
               &amp; Distributed.
             </h1>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-paper/70">
+          </div>
+
+          <div>
+            <p className="max-w-xl text-lg leading-relaxed text-paper/70">
               {site.name} is an international film production &amp; distribution
-              company with operations in the UK, France and Thailand. We curate,
-              produce, and distribute feature-length anthologies featuring
-              exceptional short films from around the world — bringing
-              complementary films together around a shared theme to create
-              cohesive viewing experiences for global audiences while showcasing
-              a new generation of filmmakers.
+              company with operations in the UK, France and Thailand.
+            </p>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-paper/70">
+              We curate, produce, and distribute feature-length anthologies
+              featuring exceptional short films from around the world.
+            </p>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-paper/70">
+              By bringing complementary films together around a shared theme,
+              we create cohesive viewing experiences for global audiences while
+              showcasing a new generation of filmmakers.
             </p>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-paper/70">
               Alongside our anthology catalogue, we develop, produce and
@@ -113,7 +124,7 @@ export default function HomePage() {
       {/* What drives us */}
       <section className="border-b rule-on-paper bg-paper py-24 text-paper-foreground">
         <Container>
-          <SectionHeading index="(01)" eyebrow="What Drives Us" title="Our Ethos" tone="paper" />
+          <SectionHeading eyebrow="What Drives Us" title="Our Ethos" tone="paper" />
           <div className="mt-14">
             <NumberedList items={ethos} tone="paper" columns={3} />
           </div>
@@ -123,13 +134,16 @@ export default function HomePage() {
             decade-long legacy of global content acquisition and international
             distribution expertise into a new, agile distribution model.
           </p>
+          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-paper-foreground/85">
+            {site.name} has acquired the FilmDoo brand.
+          </p>
         </Container>
       </section>
 
       {/* Who we work with */}
       <section className="border-b rule-on-dark py-24">
         <Container>
-          <SectionHeading index="(02)" eyebrow="Who We Work With" title="Our Partners" />
+          <SectionHeading eyebrow="Who We Work With" title="Our Partners" />
           <div className="mt-10">
             <PillList items={[...partnerTypes]} />
           </div>
@@ -147,7 +161,6 @@ export default function HomePage() {
       <section className="bg-paper py-24 text-paper-foreground">
         <Container>
           <SectionHeading
-            index="(03)"
             eyebrow="Events & Industry Engagement"
             title="Building the Room, Not Just the Deal"
             tone="paper"
