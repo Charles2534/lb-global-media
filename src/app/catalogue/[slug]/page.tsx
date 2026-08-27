@@ -133,6 +133,16 @@ export default async function TitleDetailPage({
                   Watch on Amazon
                 </a>
               )}
+              {title.tubiUrl && (
+                <a
+                  href={title.tubiUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-paper/25 px-6 py-3 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-paper/60"
+                >
+                  Watch on Tubi
+                </a>
+              )}
               <Link
                 href="/contact?type=licensing"
                 className="rounded-full border border-paper/25 px-6 py-3 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-paper/60"

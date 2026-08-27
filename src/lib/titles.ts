@@ -29,6 +29,7 @@ export type Title = {
   licenceExpiry: string;
   delisted: boolean;
   amazonUrl: string | null;
+  tubiUrl: string | null;
 };
 
 type CsvRow = {
@@ -50,6 +51,7 @@ type CsvRow = {
   poster_link_pcloud: string;
   release_date: string;
   amazon_url: string;
+  tubi_url: string;
 };
 
 function splitList(value: string, separator: string): string[] {
@@ -87,6 +89,18 @@ function resolveAmazonUrl(row: CsvRow, delisted: boolean): string | null {
   if (!row.where_to_watch.trim().toLowerCase().includes("amazon")) return null;
   const query = encodeURIComponent(`${row.title.trim()} LB Global Media`);
   return `https://www.amazon.com/s?k=${query}&i=instant-video`;
+}
+
+// Same approach as Amazon above, but where_to_watch never actually names
+// Tubi per-title (it's only ever referenced site-wide as a partner) — so
+// there's no signal to gate on. Shows for every non-delisted title as an
+// honest tubitv.com search link until real tubi_url values are supplied.
+function resolveTubiUrl(row: CsvRow, delisted: boolean): string | null {
+  if (delisted) return null;
+  const override = row.tubi_url.trim();
+  if (override) return override;
+  const query = encodeURIComponent(row.title.trim());
+  return `https://tubitv.com/search/${query}`;
 }
 
 function parseCsv(): Title[] {
@@ -131,6 +145,7 @@ function parseCsv(): Title[] {
       licenceExpiry: row.licence_expiry.trim(),
       delisted,
       amazonUrl: resolveAmazonUrl(row, delisted),
+      tubiUrl: resolveTubiUrl(row, delisted),
     });
   }
 
