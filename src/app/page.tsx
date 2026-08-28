@@ -92,7 +92,7 @@ export default function HomePage() {
               narrow screen. */}
           <div className="mt-10">
             <div
-              className="mx-auto mb-8 w-full max-w-sm lg:float-right lg:mb-6 lg:ml-12 lg:w-[480px] lg:max-w-none xl:w-[560px]"
+              className="mx-auto mb-8 w-full max-w-sm lg:float-right lg:-mt-24 lg:mb-6 lg:ml-12 lg:w-[480px] lg:max-w-none xl:-mt-32 xl:w-[560px]"
               style={{ shapeOutside: OCTAGON_CLIP, shapeMargin: "2.5rem" }}
             >
               <OctagonMedia
