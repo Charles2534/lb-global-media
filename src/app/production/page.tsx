@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  CompassIcon,
+  FilmStripIcon,
+  HandshakeIcon,
+  PuzzlePieceIcon,
+  ShareNetworkIcon,
+  StarIcon,
+  TargetIcon,
+} from "@phosphor-icons/react/ssr";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CardList } from "@/components/CardList";
@@ -38,30 +47,37 @@ const whatWeBring = [
   {
     title: "International Acquisition & Distribution",
     body: "Extensive experience in international content acquisition and distribution.",
+    icon: ShareNetworkIcon,
   },
   {
     title: "Established Relationships",
     body: "Relationships with platforms, filmmakers and production partners.",
+    icon: HandshakeIcon,
   },
   {
     title: "Proven Curation",
     body: "Experience curating & distributing content to platforms worldwide.",
+    icon: FilmStripIcon,
   },
   {
     title: "Cross-Border Perspective",
     body: "Cross-border development and co-production perspectives.",
+    icon: CompassIcon,
   },
   {
     title: "Efficient Co-Production Models",
     body: "Cost-efficient, multi-national co-production models.",
+    icon: PuzzlePieceIcon,
   },
   {
     title: "Access to Talent",
     body: "Access to emerging creative talent and distinctive global stories.",
+    icon: StarIcon,
   },
   {
     title: "International Positioning",
     body: "Support in positioning projects for international audiences and partners.",
+    icon: TargetIcon,
   },
 ];
 
