@@ -1,5 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+  BridgeIcon,
+  BroadcastIcon,
+  FilmStripIcon,
+  GlobeIcon,
+  LeafIcon,
+  SparkleIcon,
+} from "@phosphor-icons/react/ssr";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { NumberedList } from "@/components/NumberedList";
@@ -16,26 +24,32 @@ const ethos = [
   {
     title: "Thoughtful Curation",
     body: "We select films for their thematic, emotional and visual compatibility.",
+    icon: FilmStripIcon,
   },
   {
     title: "Global & Diverse Narratives",
     body: "We bring together stories, filmmakers and audiences from different cultures.",
+    icon: GlobeIcon,
   },
   {
     title: "Emerging Filmmakers",
     body: "We help new talent reach wider audiences and gain long-term visibility.",
+    icon: SparkleIcon,
   },
   {
     title: "Building Creative Bridges",
     body: "We connect filmmakers, producers, cultures and audiences internationally.",
+    icon: BridgeIcon,
   },
   {
     title: "Responsible Innovation",
     body: "We embrace new technologies and models that empower creativity, production and distribution without losing creative control.",
+    icon: LeafIcon,
   },
   {
     title: "Distribution-Minded",
     body: "We believe every film deserves the right audience — our ethos isn't just to make or curate a film, but to help it find real distribution and reach paying audiences.",
+    icon: BroadcastIcon,
   },
 ];
 
