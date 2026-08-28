@@ -5,8 +5,11 @@ import { useEffect, useRef } from "react";
 
 // Traced from the actual brand mark (Media/BRAND/lb-global-media-gradient-*.png)
 // via pixel analysis, not eyeballed — this is a true regular octagon, vertex-up,
-// matching the logo exactly rather than an approximation.
-const OCTAGON_CLIP =
+// matching the logo exactly rather than an approximation. Exported so callers
+// can reuse the identical shape for CSS `shape-outside` (e.g. wrapping text
+// around this component when it's floated) — text-wrap only looks right if
+// the wrap boundary matches the visible clip exactly.
+export const OCTAGON_CLIP =
   "polygon(50% 0%, 85.355% 14.645%, 100% 50%, 85.355% 85.355%, 50% 100%, 14.645% 85.355%, 0% 50%, 14.645% 14.645%)";
 
 export type OctagonMediaProps = {

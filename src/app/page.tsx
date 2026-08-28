@@ -12,7 +12,7 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { NumberedList } from "@/components/NumberedList";
 import { LogoStrip } from "@/components/LogoStrip";
-import { OctagonMedia } from "@/components/OctagonMedia";
+import { OCTAGON_CLIP, OctagonMedia } from "@/components/OctagonMedia";
 import { getAllTitles } from "@/lib/titles";
 import { site } from "@/lib/site";
 
@@ -72,21 +72,35 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden border-b rule-on-dark pb-24 pt-16 sm:pt-24">
-        <Container className="grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div className="lg:col-span-2">
-            <p className="font-mono text-xs uppercase tracking-widest text-paper/50">
-              International Film Production &amp; Distribution
-            </p>
-            <h1 className="font-display mt-5 max-w-none text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
-              Global Stories.
-              <br />
-              <span className="text-gradient">Curated, Produced</span>
-              <br />
-              &amp; Distributed.
-            </h1>
-          </div>
+        <Container>
+          <p className="font-mono text-xs uppercase tracking-widest text-paper/50">
+            International Film Production &amp; Distribution
+          </p>
+          <h1 className="font-display mt-5 max-w-4xl text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
+            Global Stories.
+            <br />
+            <span className="text-gradient">Curated, Produced</span>
+            <br />
+            &amp; Distributed.
+          </h1>
 
-          <div>
+          {/* The octagon floats large on desktop, with shape-outside matching
+              its exact clip-path so the paragraph text genuinely wraps around
+              the visible shape rather than an invisible rectangle. Below lg
+              it drops the float and stacks as a normal centered block — a
+              floated shape this size has no sensible reading order on a
+              narrow screen. */}
+          <div className="mt-10">
+            <div
+              className="mx-auto mb-8 w-full max-w-sm lg:float-right lg:mb-6 lg:ml-12 lg:w-[480px] lg:max-w-none xl:w-[560px]"
+              style={{ shapeOutside: OCTAGON_CLIP, shapeMargin: "2.5rem" }}
+            >
+              <OctagonMedia
+                posterSrc="/home/stills/still-7.jpg"
+                alt="LB Global Media showreel"
+              />
+            </div>
+
             <p className="max-w-xl text-lg leading-relaxed text-paper/70">
               {site.name} is an international film production &amp; distribution
               company with operations in the UK, France and Thailand.
@@ -120,13 +134,9 @@ export default function HomePage() {
                 Partner With Us
               </Link>
             </div>
-          </div>
 
-          <OctagonMedia
-            posterSrc="/home/stills/still-7.jpg"
-            alt="LB Global Media showreel"
-            className="mx-auto w-full max-w-md"
-          />
+            <div className="clear-both" />
+          </div>
         </Container>
       </section>
 
