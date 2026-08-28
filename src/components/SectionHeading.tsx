@@ -9,7 +9,7 @@ export function SectionHeading({
   tone?: "dark" | "paper";
   align?: "left" | "center";
 }) {
-  const mutedClass = tone === "dark" ? "text-paper/50" : "text-paper-foreground/50";
+  const mutedClass = tone === "dark" ? "text-paper/50" : "text-paper-foreground/70";
 
   return (
     <div className={align === "center" ? "text-center" : ""}>

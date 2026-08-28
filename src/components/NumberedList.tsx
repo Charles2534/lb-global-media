@@ -7,10 +7,12 @@ export function NumberedList({
   items,
   tone = "dark",
   columns = 1,
+  showNumbers = true,
 }: {
   items: NumberedItem[];
   tone?: "dark" | "paper";
   columns?: 1 | 2 | 3;
+  showNumbers?: boolean;
 }) {
   const ruleClass = tone === "dark" ? "rule-on-dark" : "rule-on-paper";
   const numberClass = tone === "dark" ? "text-paper/30" : "text-paper-foreground/30";
@@ -27,10 +29,14 @@ export function NumberedList({
     <ol className={`grid grid-cols-1 gap-x-10 gap-y-8 ${gridClass}`}>
       {items.map((item, i) => (
         <li key={item.title} className={`border-t pt-6 ${ruleClass}`}>
-          <span className={`font-display block text-3xl font-semibold ${numberClass}`}>
-            {String(i + 1).padStart(2, "0")}
-          </span>
-          <h3 className="font-display mt-3 text-lg font-semibold">{item.title}</h3>
+          {showNumbers && (
+            <span className={`font-display block text-3xl font-semibold ${numberClass}`}>
+              {String(i + 1).padStart(2, "0")}
+            </span>
+          )}
+          <h3 className={`font-display font-semibold ${showNumbers ? "mt-3" : ""} text-lg`}>
+            {item.title}
+          </h3>
           <p className={`mt-2 text-sm leading-relaxed ${bodyClass}`}>{item.body}</p>
         </li>
       ))}
