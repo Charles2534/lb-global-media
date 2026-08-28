@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/Container";
+import { EventGalleryLightbox } from "@/components/EventGalleryLightbox";
 import { getAllTitles, getTitleBySlug } from "@/lib/titles";
 
 export function generateStaticParams() {
@@ -157,21 +158,13 @@ export default async function TitleDetailPage({
         <section className="border-b rule-on-dark py-16">
           <Container>
             <h2 className="font-display text-2xl font-semibold">Stills</h2>
-            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {title.stills.map((src) => (
-                <div
-                  key={src}
-                  className="relative aspect-[4/3] overflow-hidden rounded-xl bg-ink-soft"
-                >
-                  <Image
-                    src={src}
-                    alt={`${title.title} still`}
-                    fill
-                    sizes="(min-width: 640px) 50vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+            <div className="mt-6">
+              <EventGalleryLightbox
+                photos={title.stills.map((src) => ({
+                  src,
+                  alt: `${title.title} still`,
+                }))}
+              />
             </div>
           </Container>
         </section>
