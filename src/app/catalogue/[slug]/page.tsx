@@ -53,13 +53,13 @@ export default async function TitleDetailPage({
 
       <section className="border-b rule-on-dark py-16">
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative aspect-[2/3] w-full overflow-hidden rounded-2xl bg-ink-soft">
+          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-ink-soft">
             <Image
               src={title.poster}
               alt={`${title.title} poster`}
               fill
               sizes="(min-width: 1024px) 40vw, 100vw"
-              className="object-contain"
+              className="object-cover"
               priority
             />
           </div>
