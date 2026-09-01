@@ -64,6 +64,7 @@ export function OctagonMedia({
             className="h-full w-full object-cover"
             src={videoSrc}
             poster={posterSrc}
+            preload="metadata"
             autoPlay
             loop
             muted

@@ -96,7 +96,8 @@ export default function HomePage() {
               style={{ shapeOutside: OCTAGON_CLIP, shapeMargin: "2.5rem" }}
             >
               <OctagonMedia
-                posterSrc="/home/stills/still-7.jpg"
+                videoSrc="/home/hero-octagon.mp4"
+                posterSrc="/home/hero-octagon-poster.jpg"
                 alt="LB Global Media showreel"
               />
             </div>

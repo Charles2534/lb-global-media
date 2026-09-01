@@ -91,6 +91,30 @@ copy(
   path.join(PUBLIC, "production", "masterclass-wide.jpg")
 );
 
+// Home / hero octagon placeholder video — NOT run as part of this script, since
+// it needs the `ffmpeg` binary rather than sharp. Source:
+// Media/HOME/octagon-hero-video-1.mp4.mp4 (1920x1080 h264+aac, 10.4MB, 24.5s;
+// note the accidental double ".mp4" in the filename on disk). Re-run this
+// command by hand if the source placeholder is ever replaced — it center-crops
+// the 16:9 source to a 1:1 square (matching the object-cover crop the octagon
+// already applies at render time, so no extra content is lost), downscales to
+// 720x720 (2x the largest on-screen render size, 560px, for retina), strips
+// the unused audio track (video is always muted), and adds +faststart for
+// progressive playback:
+//
+//   ffmpeg -i "Media/HOME/octagon-hero-video-1.mp4.mp4" \
+//     -vf "crop=1080:1080:420:0,scale=720:720" \
+//     -an -c:v libx264 -preset slow -crf 23 -pix_fmt yuv420p -movflags +faststart \
+//     public/home/hero-octagon.mp4
+//
+// Poster frame (shown for first paint, before the video loads) extracted from
+// the transcoded output at the 1s mark:
+//
+//   ffmpeg -ss 1 -i public/home/hero-octagon.mp4 -frames:v 1 -q:v 3 \
+//     public/home/hero-octagon-poster.jpg
+//
+// Result: 10.4MB -> 2.6MB video, plus a 78KB poster.
+
 console.log("Home / masterclass photos:");
 const MASTERCLASS = path.join(
   MEDIA,
