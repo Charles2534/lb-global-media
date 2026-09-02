@@ -60,7 +60,6 @@ const PARTNERS = path.join(MEDIA, "PARTNERS");
 
 // Plain copies — these already have real (or acceptably close-to-theme) transparency.
 const partnerMap = {
-  "amazon.png": "Amazon-Prime-Video-Emblem.png",
   "tubi.png": "Tubi-Logo.png",
   "digitalvirgo.webp": "DV_Square_No-Baseline_white.webp",
   "hoopla.png": "hoopla-logo-blue copy.png",
@@ -80,6 +79,20 @@ const chromaKeyMap = {
 for (const [destName, srcName] of Object.entries(chromaKeyMap)) {
   await copyChromaKeyed(path.join(PARTNERS, srcName), path.join(PUBLIC, "partners", destName));
 }
+
+// Amazon's white wordmark ships on a near-white (247,247,247) card rather
+// than true transparency — and since the wordmark itself is a flat white
+// (255,255,255), it sits only ~14 units away from the card color in RGB
+// space. The default chroma-key thresholds (18/40) would treat that as
+// "close enough to background" and erase the text along with the card, so
+// this one needs much tighter thresholds tuned to the actual gap between
+// the two (verified against the source's pixel histogram: background is a
+// clean 247, text a clean 255, with only a thin antialiased band between).
+await copyChromaKeyed(
+  path.join(PARTNERS, "amazon-white.png.png"),
+  path.join(PUBLIC, "partners", "amazon.png"),
+  { lowThreshold: 3, highThreshold: 9 }
+);
 
 console.log("Production:");
 copy(

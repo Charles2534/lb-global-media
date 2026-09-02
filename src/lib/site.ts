@@ -20,7 +20,7 @@ export const enquiryTypes = [
 ] as const;
 
 export const partners = [
-  { name: "Amazon Prime Video", file: "amazon.png", size: "lg" },
+  { name: "Amazon", file: "amazon.png", size: "lg" },
   { name: "Tubi", file: "tubi.png", size: "default" },
   { name: "Box Brazil Play", file: "boxbrazil.png", size: "lg" },
   { name: "Future Today", file: "futuretoday.png", size: "lg" },
