@@ -130,7 +130,7 @@ export default function CataloguePage() {
             submissions and partnership enquiries from:
           </p>
           <div className="mt-6">
-            <DotList items={filmmakerAudience} />
+            <DotList items={filmmakerAudience} columns={1} />
           </div>
           <p className="mt-10 text-paper/80">
             If you own the rights to an individual short film or film
