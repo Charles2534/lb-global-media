@@ -155,29 +155,36 @@ export default function ProductionPage() {
             complementary partners and support stories capable of resonating
             beyond their country of origin.
           </p>
-
-          <div className="mt-12 rounded-2xl border rule-on-dark p-8">
-            <p className="font-display text-xl font-semibold">
-              Weerada Sucharitkul
-              <span className="ml-3 font-mono text-xs font-normal uppercase tracking-widest text-paper/50">
-                Founder &amp; CEO
-              </span>
-            </p>
-            <p className="mt-4 max-w-2xl leading-relaxed text-paper/70">
-              Founder and CEO Weerada Sucharitkul brings more than a decade of
-              experience in international content acquisition and
-              distribution. An alumna of the EAVE Ties That Bind international
-              co-production programme, she has lived in 11 countries across
-              five continents and has a particular interest in projects
-              connecting Asia, Europe and Latin America.
-            </p>
-          </div>
-
-          <p className="mt-10 max-w-2xl text-lg leading-relaxed text-paper/70">
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-paper/70">
             At {site.name}, we are particularly interested in projects which
             bring fresh, authentic perspectives from under-represented voices
             around the world.
           </p>
+
+          <div className="mt-12 max-w-2xl rounded-2xl border rule-on-dark bg-paper/[0.03] p-8">
+            <div className="flex items-start gap-5">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-brand font-display text-lg font-semibold text-white">
+                WS
+              </div>
+              <div>
+                <p className="font-display text-xl font-semibold">
+                  Weerada Sucharitkul
+                  <span className="ml-3 font-mono text-xs font-normal uppercase tracking-widest text-paper/50">
+                    Founder &amp; CEO
+                  </span>
+                </p>
+                <p className="mt-4 leading-relaxed text-paper/70">
+                  Founder and CEO Weerada Sucharitkul brings more than a
+                  decade of experience in international content acquisition
+                  and distribution. An alumna of the EAVE Ties That Bind
+                  international co-production programme, she has lived in 11
+                  countries across five continents and has a particular
+                  interest in projects connecting Asia, Europe and Latin
+                  America.
+                </p>
+              </div>
+            </div>
+          </div>
         </Container>
       </section>
 
