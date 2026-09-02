@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/Container";
+import { CastCrewList } from "@/components/CastCrewList";
 import { EventGalleryLightbox } from "@/components/EventGalleryLightbox";
 import { getAllTitles, getTitleBySlug } from "@/lib/titles";
 
@@ -89,6 +90,16 @@ export default async function TitleDetailPage({
                 <dt className="font-mono text-xs uppercase tracking-wide text-paper/45">Countries</dt>
                 <dd className="mt-1 text-sm text-paper/80">{title.countries.join(", ")}</dd>
               </div>
+              {title.keywordsTags.length > 0 && (
+                <div className="col-span-2 sm:col-span-3">
+                  <dt className="font-mono text-xs uppercase tracking-wide text-paper/45">
+                    Keywords
+                  </dt>
+                  <dd className="mt-1 text-sm text-paper/80">
+                    {title.keywordsTags.join(", ")}
+                  </dd>
+                </div>
+              )}
               {title.subtitlesAvailable.length > 0 && (
                 <div className="col-span-2 sm:col-span-3">
                   <dt className="font-mono text-xs uppercase tracking-wide text-paper/45">
@@ -106,14 +117,24 @@ export default async function TitleDetailPage({
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              {title.amazonUrl && (
+              {title.amazonComUrl && (
                 <a
-                  href={title.amazonUrl}
+                  href={title.amazonComUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-full bg-gradient-brand px-6 py-3 font-mono text-xs uppercase tracking-widest text-white transition-opacity hover:opacity-90"
                 >
-                  Watch on Amazon
+                  Watch on Amazon.com
+                </a>
+              )}
+              {title.amazonCoUkUrl && (
+                <a
+                  href={title.amazonCoUkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-paper/25 px-6 py-3 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-paper/60"
+                >
+                  Watch on Amazon.co.uk
                 </a>
               )}
               {title.tubiUrl && (
@@ -124,6 +145,16 @@ export default async function TitleDetailPage({
                   className="rounded-full border border-paper/25 px-6 py-3 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-paper/60"
                 >
                   Watch on Tubi
+                </a>
+              )}
+              {title.fawesomeUrl && (
+                <a
+                  href={title.fawesomeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-paper/25 px-6 py-3 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-paper/60"
+                >
+                  Watch on Fawesome
                 </a>
               )}
               <Link
@@ -164,6 +195,26 @@ export default async function TitleDetailPage({
                   src,
                   alt: `${title.title} still`,
                 }))}
+              />
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {(title.director.length > 0 ||
+        title.writer.length > 0 ||
+        title.producers.length > 0 ||
+        title.cast.length > 0) && (
+        <section className="border-b rule-on-paper bg-paper py-16 text-paper-foreground">
+          <Container>
+            <h2 className="font-display text-2xl font-semibold">Cast &amp; Crew</h2>
+            <div className="mt-6">
+              <CastCrewList
+                director={title.director}
+                writer={title.writer}
+                producers={title.producers}
+                cast={title.cast}
+                tone="paper"
               />
             </div>
           </Container>
