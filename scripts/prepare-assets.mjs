@@ -21,7 +21,11 @@ function copy(src, dest) {
 // that shows up as a visible rectangle. Chroma-key it out: sample the corner
 // color and fade anything close to it to transparent, with a soft ramp so
 // anti-aliased edges (e.g. a circular badge) don't get a hard cutout halo.
-async function copyChromaKeyed(src, dest, { lowThreshold = 18, highThreshold = 40 } = {}) {
+async function copyChromaKeyed(
+  src,
+  dest,
+  { lowThreshold = 18, highThreshold = 40, featherSigma = 0 } = {}
+) {
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   const img = sharp(src);
   const { data, info } = await img.raw().ensureAlpha().toBuffer({ resolveWithObject: true });
@@ -39,6 +43,27 @@ async function copyChromaKeyed(src, dest, { lowThreshold = 18, highThreshold = 4
       const t = (dist - lowThreshold) / (highThreshold - lowThreshold);
       data[i + 3] = Math.round(data[i + 3] * t);
     }
+  }
+
+  if (featherSigma > 0) {
+    // A tight color-distance threshold (needed when foreground and
+    // background are nearly the same color) collapses the antialiased
+    // transition down to almost nothing, leaving hard/jagged edges. Soften
+    // just the alpha channel with a slight blur — safe here because on
+    // both sides of every edge we key this way, the RGB is already the
+    // same color, so blurring opacity alone can't introduce color fringing.
+    const alpha = Buffer.alloc(width * height);
+    for (let i = 0, j = 0; i < data.length; i += channels, j++) alpha[j] = data[i + 3];
+    // toColourspace('b-w') is required here — sharp silently expands a
+    // single-channel raw buffer to 3-channel RGB partway through .blur(),
+    // which would otherwise misalign every read below into stripes of
+    // garbage (verified: raw() output was 3x the expected byte length).
+    const blurred = await sharp(alpha, { raw: { width, height, channels: 1 } })
+      .blur(featherSigma)
+      .toColourspace("b-w")
+      .raw()
+      .toBuffer();
+    for (let i = 0, j = 0; i < data.length; i += channels, j++) data[i + 3] = blurred[j];
   }
 
   await sharp(data, { raw: { width, height, channels } }).png().toFile(dest);
@@ -88,10 +113,13 @@ for (const [destName, srcName] of Object.entries(chromaKeyMap)) {
 // this one needs much tighter thresholds tuned to the actual gap between
 // the two (verified against the source's pixel histogram: background is a
 // clean 247, text a clean 255, with only a thin antialiased band between).
+// That tight a threshold leaves almost no ramp to work with, so the cutout
+// comes out visibly jagged — featherSigma re-softens just the alpha edge
+// afterward.
 await copyChromaKeyed(
   path.join(PARTNERS, "amazon-white.png.png"),
   path.join(PUBLIC, "partners", "amazon.png"),
-  { lowThreshold: 3, highThreshold: 9 }
+  { lowThreshold: 3, highThreshold: 9, featherSigma: 1 }
 );
 
 console.log("Production:");
