@@ -132,7 +132,7 @@ export default function ProductionPage() {
             include:
           </p>
           <div className="mt-6">
-            <DotList items={formats} tone="paper" />
+            <DotList items={formats} tone="paper" columns={4} />
           </div>
         </Container>
       </section>
