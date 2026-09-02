@@ -5,12 +5,11 @@ export function DotList({
 }: {
   items: string[];
   tone?: "dark" | "paper";
-  columns?: 1 | 3 | 4;
+  columns?: 1 | 3;
 }) {
   const textClass = tone === "dark" ? "text-paper/70" : "text-paper-foreground/70";
   const dotClass = tone === "dark" ? "bg-paper/40" : "bg-paper-foreground/40";
-  const gridClass =
-    columns === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : columns === 3 ? "sm:grid-cols-3" : "";
+  const gridClass = columns === 3 ? "sm:grid-cols-3" : "";
 
   return (
     <ul className={`grid grid-cols-1 gap-x-8 gap-y-4 ${gridClass}`}>
