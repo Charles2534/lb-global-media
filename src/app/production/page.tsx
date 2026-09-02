@@ -12,7 +12,7 @@ import {
 } from "@phosphor-icons/react/ssr";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
-import { CardList } from "@/components/CardList";
+import { DotList } from "@/components/DotList";
 import { NumberedList } from "@/components/NumberedList";
 import { EventGalleryLightbox } from "@/components/EventGalleryLightbox";
 import { OctagonMedia } from "@/components/OctagonMedia";
@@ -123,7 +123,7 @@ export default function ProductionPage() {
             travel across and transcend cultures. Our focus areas include:
           </p>
           <div className="mt-6">
-            <CardList items={focusAreas} tone="paper" />
+            <DotList items={focusAreas} tone="paper" />
           </div>
 
           <p className="mt-10 max-w-2xl text-paper-foreground/70">
@@ -132,7 +132,7 @@ export default function ProductionPage() {
             include:
           </p>
           <div className="mt-6">
-            <CardList items={formats} tone="paper" />
+            <DotList items={formats} tone="paper" />
           </div>
         </Container>
       </section>

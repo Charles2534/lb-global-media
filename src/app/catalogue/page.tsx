@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
-import { PillList } from "@/components/PillList";
+import { DotList } from "@/components/DotList";
 import { CatalogueBrowser } from "@/components/CatalogueBrowser";
 import { OctagonMedia } from "@/components/OctagonMedia";
 import { getAllGenres, getAllTitles } from "@/lib/titles";
@@ -102,16 +102,9 @@ export default function CataloguePage() {
           <p className="mt-6 max-w-2xl text-paper-foreground/70">
             We provide partners with:
           </p>
-          <ul className="mt-6 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-2">
-            {partnerDeliverables.map((item) => (
-              <li
-                key={item}
-                className="rounded-lg border rule-on-paper px-4 py-3 text-sm text-paper-foreground/75"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
+          <div className="mt-6">
+            <DotList items={partnerDeliverables} tone="paper" />
+          </div>
           <p className="mt-10 text-paper-foreground/80">
             For interest in licensing our titles, please{" "}
             <Link
@@ -137,7 +130,7 @@ export default function CataloguePage() {
             submissions and partnership enquiries from:
           </p>
           <div className="mt-6">
-            <PillList items={filmmakerAudience} />
+            <DotList items={filmmakerAudience} />
           </div>
           <p className="mt-10 text-paper/80">
             If you own the rights to an individual short film or film

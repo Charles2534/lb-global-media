@@ -12,6 +12,7 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { NumberedList } from "@/components/NumberedList";
 import { LogoStrip } from "@/components/LogoStrip";
+import { DotList } from "@/components/DotList";
 import { OCTAGON_CLIP, OctagonMedia } from "@/components/OctagonMedia";
 import { getAllTitles } from "@/lib/titles";
 import { site } from "@/lib/site";
@@ -164,14 +165,9 @@ export default function HomePage() {
       <section className="border-b rule-on-dark py-24">
         <Container>
           <SectionHeading eyebrow="Who We Work With" title="Our Partners" />
-          <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-3">
-            {partnerTypes.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-sm text-paper/70">
-                <span className="h-1 w-1 shrink-0 rounded-full bg-paper/40" aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
+          <div className="mt-10">
+            <DotList items={partnerTypes} />
+          </div>
 
           <p className="mt-16 font-mono text-xs uppercase tracking-widest text-paper/50">
             Discover Some of Our Global Partners
