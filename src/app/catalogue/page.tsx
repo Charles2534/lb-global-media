@@ -67,9 +67,9 @@ export default function CataloguePage() {
               Our catalogue currently includes curated anthologies spanning
               across:
             </p>
-            <div className="mt-4">
-              <PillList items={catalogueGenres} />
-            </div>
+            <p className="mt-4 font-mono text-xs uppercase tracking-widest text-paper/50">
+              {catalogueGenres.join(" · ")}
+            </p>
           </div>
 
           <OctagonMedia
