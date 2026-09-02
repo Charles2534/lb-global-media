@@ -102,7 +102,8 @@ export default function ProductionPage() {
           </div>
 
           <OctagonMedia
-            posterSrc="/home/stills/still-8.jpg"
+            videoSrc="/production/hero-octagon.mp4"
+            posterSrc="/production/hero-octagon-poster.jpg"
             alt="LB Global Media production showreel"
             className="mx-auto w-full max-w-sm"
           />

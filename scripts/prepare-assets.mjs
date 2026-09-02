@@ -114,6 +114,27 @@ copy(
 //     public/home/hero-octagon-poster.jpg
 //
 // Result: 10.4MB -> 2.6MB video, plus a 78KB poster.
+//
+// Catalogue and Production hero octagons follow the identical treatment,
+// same source specs (1920x1080 h264+aac, 25fps), same crop/scale/strip/poster
+// commands, just different source files and output directories:
+//
+//   ffmpeg -i "Media/HOME/octagon-hero-video-2.mp4.mp4" \
+//     -vf "crop=1080:1080:420:0,scale=720:720" \
+//     -an -c:v libx264 -preset slow -crf 23 -pix_fmt yuv420p -movflags +faststart \
+//     public/catalogue/hero-octagon.mp4
+//   ffmpeg -ss 3 -i public/catalogue/hero-octagon.mp4 -frames:v 1 -q:v 3 \
+//     public/catalogue/hero-octagon-poster.jpg
+//   (11.7MB -> 2.6MB; poster taken at the 3s mark rather than 1s — the 1s
+//   frame on this clip was a near-black abstract shot, not representative)
+//
+//   ffmpeg -i "Media/HOME/octagon-hero-video-3.mp4.mp4" \
+//     -vf "crop=1080:1080:420:0,scale=720:720" \
+//     -an -c:v libx264 -preset slow -crf 23 -pix_fmt yuv420p -movflags +faststart \
+//     public/production/hero-octagon.mp4
+//   ffmpeg -ss 1 -i public/production/hero-octagon.mp4 -frames:v 1 -q:v 3 \
+//     public/production/hero-octagon-poster.jpg
+//   (7.9MB -> 2.1MB)
 
 console.log("Home / masterclass photos:");
 const MASTERCLASS = path.join(

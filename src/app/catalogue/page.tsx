@@ -73,7 +73,8 @@ export default function CataloguePage() {
           </div>
 
           <OctagonMedia
-            posterSrc="/home/stills/still-5.jpg"
+            videoSrc="/catalogue/hero-octagon.mp4"
+            posterSrc="/catalogue/hero-octagon-poster.jpg"
             alt="LB Global Media catalogue showreel"
             className="mx-auto w-full max-w-sm"
           />
