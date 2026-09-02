@@ -122,7 +122,7 @@ export default async function TitleDetailPage({
                   href={title.amazonComUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-gradient-brand px-6 py-3 font-mono text-xs uppercase tracking-widest text-white transition-opacity hover:opacity-90"
+                  className="rounded-full border border-paper/25 px-6 py-3 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-paper/60"
                 >
                   Watch on Amazon.com
                 </a>
@@ -159,7 +159,7 @@ export default async function TitleDetailPage({
               )}
               <Link
                 href="/contact?type=licensing"
-                className="rounded-full border border-paper/25 px-6 py-3 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-paper/60"
+                className="rounded-full bg-gradient-brand px-6 py-3 font-mono text-xs uppercase tracking-widest text-white transition-opacity hover:opacity-90"
               >
                 Enquire About Licensing
               </Link>
