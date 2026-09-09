@@ -19,7 +19,13 @@ import { site } from "@/lib/site";
 
 // "An Artificial Life" isn't in titles.csv yet (no slug, no poster asset) —
 // add it here once it's been added to the catalogue data.
-const featuredTitleSlugs = ["no-place-to-hide", "girls-will-be", "tender-resistance"];
+const featuredTitleSlugs = [
+  "no-place-to-hide",
+  "girls-will-be",
+  "tender-resistance",
+  "from-her-bones",
+  "beyond-our-end",
+];
 
 const ethos = [
   {
@@ -191,12 +197,12 @@ export default function HomePage() {
         <Container>
           <SectionHeading eyebrow="From the Catalogue" title="Featured Titles" tone="paper" />
 
-          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 flex flex-wrap justify-center gap-8">
             {featuredTitles.map((title) => (
               <Link
                 key={title.slug}
                 href={`/catalogue/${title.slug}`}
-                className="group block"
+                className="group block w-full sm:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)]"
               >
                 <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-ink-soft">
                   <Image
