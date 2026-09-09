@@ -3,13 +3,16 @@ export function SectionHeading({
   title,
   tone = "dark",
   align = "left",
+  titleFont = "display",
 }: {
   eyebrow?: string;
   title: string;
   tone?: "dark" | "paper";
   align?: "left" | "center";
+  titleFont?: "display" | "mono";
 }) {
   const mutedClass = tone === "dark" ? "text-paper/50" : "text-paper-foreground/70";
+  const titleFontClass = titleFont === "mono" ? "font-mono" : "font-display";
 
   return (
     <div className={align === "center" ? "text-center" : ""}>
@@ -20,7 +23,9 @@ export function SectionHeading({
       >
         {eyebrow && <span>{eyebrow}</span>}
       </div>
-      <h2 className="font-display mt-3 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
+      <h2
+        className={`${titleFontClass} mt-3 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl`}
+      >
         {title}
       </h2>
     </div>

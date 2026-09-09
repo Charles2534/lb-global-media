@@ -48,8 +48,8 @@ const ethos = [
     icon: LeafIcon,
   },
   {
-    title: "Distribution-Minded",
-    body: "We believe every film deserves the right audience — our ethos isn't just to make or curate a film, but to help it find real distribution and reach paying audiences.",
+    title: "Distribution Focussed",
+    body: "We believe every film deserves the right audience. We don't just create a film, but help find real distribution and reach global audiences.",
     icon: BroadcastIcon,
   },
 ];
@@ -151,9 +151,17 @@ export default function HomePage() {
           </div>
           <p className="font-display mt-16 max-w-3xl text-2xl leading-snug text-paper-foreground/80">
             {site.name} is the evolution of{" "}
-            <span className="text-gradient">FilmDoo</span>, carrying forward a
-            decade-long legacy of global content acquisition and international
-            distribution expertise into a new, agile distribution model.
+            <a
+              href="https://www.filmdoo.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gradient underline decoration-transparent hover:decoration-current"
+            >
+              FilmDoo
+            </a>
+            , carrying forward a decade-long legacy of global content
+            acquisition and international distribution expertise into a new,
+            agile distribution model.
           </p>
           <p className="mt-4 max-w-3xl text-lg leading-relaxed text-paper-foreground/85">
             {site.name} has acquired the FilmDoo brand.
@@ -164,9 +172,9 @@ export default function HomePage() {
       {/* Who we work with */}
       <section className="border-b rule-on-dark py-24">
         <Container>
-          <SectionHeading eyebrow="Who We Work With" title="Our Partners" />
+          <SectionHeading eyebrow="Who We Work With" title="Our Partners" titleFont="mono" />
           <div className="mt-10">
-            <DotList items={partnerTypes} />
+            <DotList items={partnerTypes} size="base" font="mono" />
           </div>
 
           <p className="mt-16 font-mono text-xs uppercase tracking-widest text-paper/50">
