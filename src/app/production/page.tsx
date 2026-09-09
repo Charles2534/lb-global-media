@@ -18,7 +18,7 @@ import { EventGalleryLightbox } from "@/components/EventGalleryLightbox";
 import { OctagonMedia } from "@/components/OctagonMedia";
 import { site } from "@/lib/site";
 
-const eventPartners = ["Thai Media Fund", "Thai PBS", "Creative Economy Agency"];
+const eventPartners = ["Super Cat", "Thai Media Fund", "Thai PBS", "Creative Economy Agency"];
 
 export const metadata: Metadata = {
   title: "Production & Global Partnerships",
@@ -83,14 +83,14 @@ const whatWeBring = [
 
 export default function ProductionPage() {
   return (
-    <>
+    <div className="font-mono">
       <section className="border-b rule-on-dark pb-16 pt-16 sm:pt-24">
         <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-paper/50">
               Production &amp; Global Partnerships
             </p>
-            <h1 className="font-display mt-5 max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+            <h1 className="font-mono mt-5 max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
               {site.name} as a{" "}
               <span className="text-gradient">Global Co-Production Partner</span>
             </h1>
@@ -116,6 +116,7 @@ export default function ProductionPage() {
             eyebrow="What We Are Looking For"
             title="Distinctive Voices, International Potential"
             tone="paper"
+            titleFont="mono"
           />
           <p className="mt-6 max-w-2xl text-paper-foreground/70">
             We are particularly interested in projects with distinctive
@@ -142,6 +143,7 @@ export default function ProductionPage() {
           <SectionHeading
             eyebrow="Regional Production & Talent Networks"
             title="A Multicultural Team, Across Three Continents"
+            titleFont="mono"
           />
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper/70">
             Our multicultural team operates across London, Paris and Bangkok,
@@ -163,11 +165,11 @@ export default function ProductionPage() {
 
           <div className="mt-12 max-w-2xl rounded-2xl border rule-on-dark bg-paper/[0.03] p-8">
             <div className="flex items-start gap-5">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-brand font-display text-lg font-semibold text-white">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-brand font-mono text-lg font-semibold text-white">
                 WS
               </div>
               <div>
-                <p className="font-display text-xl font-semibold">
+                <p className="font-mono text-xl font-semibold">
                   Weerada Sucharitkul
                   <span className="ml-3 font-mono text-xs font-normal uppercase tracking-widest text-paper/50">
                     Founder &amp; CEO
@@ -194,6 +196,7 @@ export default function ProductionPage() {
             eyebrow="Our International Footprint"
             title="Europe, Asia, Latin America & North America"
             tone="paper"
+            titleFont="mono"
           />
 
           {/* The clear visual focus of this section, sized generously but kept
@@ -213,7 +216,7 @@ export default function ProductionPage() {
 
           <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div>
-              <h3 className="font-display text-lg font-semibold">Europe</h3>
+              <h3 className="font-mono text-lg font-semibold">Europe</h3>
               <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
                 <li>France and UK-based operations with strong industry presence</li>
                 <li>Production foothold in Spain and Catalonia</li>
@@ -222,20 +225,20 @@ export default function ProductionPage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-display text-lg font-semibold">Asia</h3>
+              <h3 className="font-mono text-lg font-semibold">Asia</h3>
               <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
                 <li>Established industry and local connections in Thailand</li>
                 <li>Growing networks in Singapore, Japan, Indonesia, and Malaysia</li>
               </ul>
             </div>
             <div>
-              <h3 className="font-display text-lg font-semibold">Latin America</h3>
+              <h3 className="font-mono text-lg font-semibold">Latin America</h3>
               <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
                 <li>Strong networks with producers and filmmakers in Mexico, Colombia &amp; Brazil</li>
               </ul>
             </div>
             <div>
-              <h3 className="font-display text-lg font-semibold">North America</h3>
+              <h3 className="font-mono text-lg font-semibold">North America</h3>
               <ul className="mt-3 space-y-2 text-sm leading-relaxed text-paper-foreground/70">
                 <li>
                   The US is a major licensing territory, with global partners
@@ -249,9 +252,9 @@ export default function ProductionPage() {
 
       <section className="border-b rule-on-dark py-24">
         <Container>
-          <SectionHeading eyebrow="What We Bring" title="Why Partner With Us" />
+          <SectionHeading eyebrow="What We Bring" title="Why Partner With Us" titleFont="mono" />
           <div className="mt-14">
-            <NumberedList items={whatWeBring} columns={2} />
+            <NumberedList items={whatWeBring} columns={2} titleFont="mono" />
           </div>
         </Container>
       </section>
@@ -262,13 +265,14 @@ export default function ProductionPage() {
             eyebrow="Events & Industry Engagement"
             title="Building the Room, Not Just the Deal"
             tone="paper"
+            titleFont="mono"
           />
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper-foreground/70">
             We engage with filmmakers, producers, and industry professionals to
             exchange knowledge, build relationships, and explore the changing
             international content market.
           </p>
-          <p className="font-display mt-6 text-2xl font-semibold">
+          <p className="font-mono mt-6 text-2xl font-semibold">
             Film Business Masterclass: Content Is King, Distribution Is
             Emperor, IP Is Your Asset
             <span className="mt-1 block text-base font-normal text-paper-foreground/60">
@@ -298,15 +302,22 @@ export default function ProductionPage() {
 
       <section className="bg-ink py-24">
         <Container className="text-center">
-          <h2 className="font-display text-4xl font-semibold sm:text-5xl">
+          <h2 className="font-mono text-4xl font-semibold sm:text-5xl">
             <span className="text-gradient">Partner</span> With Us
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-paper/70">
+            We believe in treating our production partners as true
+            collaborative team members.
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-paper/70">
             We welcome discussions with producers, filmmakers, financiers,
-            platforms and other organisations seeking international production
-            or distribution partners. If you are developing a project that
-            aligns with our vision and would love to explore potential
-            synergies, we would like to hear from you.
+            platforms and other organisations seeking international
+            production or distribution partners.
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-paper/70">
+            If you are developing a project that aligns with our vision and
+            would love to explore potential synergies, we would like to hear
+            from you.
           </p>
           <p className="mx-auto mt-6 max-w-2xl text-paper/70">
             {site.name} is committed to discovering and elevating distinctive
@@ -324,6 +335,6 @@ export default function ProductionPage() {
           </div>
         </Container>
       </section>
-    </>
+    </div>
   );
 }
