@@ -27,9 +27,9 @@ function NameGroup({
       : "text-paper-foreground/50 decoration-paper-foreground/30 hover:text-paper-foreground";
 
   return (
-    <div>
+    <div className="min-w-0">
       <dt className={`font-mono text-xs uppercase tracking-wide ${labelClass}`}>{label}</dt>
-      <dd className={`mt-1 text-sm leading-relaxed ${valueClass}`}>
+      <dd className={`mt-1 break-words text-sm leading-relaxed ${valueClass}`}>
         {shown.join(", ")}
         {isLong && (
           <button
@@ -60,9 +60,9 @@ export function CastCrewList({
 }) {
   return (
     <dl className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
-      <NameGroup label="Director" names={director} tone={tone} />
-      <NameGroup label="Writer" names={writer} tone={tone} />
+      <NameGroup label="Directors" names={director} tone={tone} />
       <NameGroup label="Producers" names={producers} tone={tone} />
+      <NameGroup label="Writers" names={writer} tone={tone} />
       <div className="sm:col-span-2">
         <NameGroup label="Cast" names={cast} tone={tone} previewCount={8} />
       </div>

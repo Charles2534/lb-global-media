@@ -32,19 +32,23 @@ export function TitleCard({ title }: { title: Title }) {
           <span className="shrink-0 font-mono text-xs text-paper/50">{title.year}</span>
         </div>
 
-        <p className="line-clamp-3 text-sm leading-relaxed text-paper/65">
-          {title.logline}
-        </p>
+        <div>
+          <p className="line-clamp-3 text-sm leading-relaxed text-paper/65">
+            {title.logline}
+          </p>
+          <Link
+            href={`/catalogue/${title.slug}`}
+            className="mt-1 inline-block font-mono text-xs uppercase tracking-wide text-paper/50 underline decoration-paper/30 hover:text-paper"
+          >
+            See more
+          </Link>
+        </div>
 
         <div className="mt-auto flex flex-col gap-3 pt-2">
           <dl className="grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-wide text-paper/45">
             <div>
               <dt className="inline">Runtime </dt>
               <dd className="inline text-paper/70">{title.runtime}</dd>
-            </div>
-            <div>
-              <dt className="inline">Rating </dt>
-              <dd className="inline text-paper/70">{title.rating}</dd>
             </div>
             <div className="col-span-2">
               <dt className="inline">Origin </dt>
@@ -56,11 +60,14 @@ export function TitleCard({ title }: { title: Title }) {
             </div>
           </dl>
 
-          <div className="flex flex-wrap gap-2">
+          {/* Fixed to exactly 2 tag rows' worth of height (whether a title
+              has 1 row or 4+ rows of genres) so the buttons below always
+              land at the same y position across every card in the grid. */}
+          <div className="flex h-[62px] flex-wrap items-start gap-2 overflow-hidden">
             {title.genres.map((genre) => (
               <span
                 key={genre}
-                className="rounded-full border border-paper/15 px-2.5 py-1 text-[11px] text-paper/60"
+                className="h-fit rounded-full border border-paper/15 px-2.5 py-1 text-[11px] text-paper/60"
               >
                 {genre}
               </span>

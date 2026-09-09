@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/Container";
+import { BackToCatalogueLink } from "@/components/BackToCatalogueLink";
 import { CastCrewList } from "@/components/CastCrewList";
 import { EventGalleryLightbox } from "@/components/EventGalleryLightbox";
 import { getAllTitles, getTitleBySlug } from "@/lib/titles";
@@ -26,14 +27,6 @@ export async function generateMetadata({
   };
 }
 
-const BackToCatalogue = () => (
-  <Link
-    href="/catalogue"
-    className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-paper/60 transition-colors hover:text-paper"
-  >
-    ← Back to Catalogue
-  </Link>
-);
 
 export default async function TitleDetailPage({
   params,
@@ -48,7 +41,7 @@ export default async function TitleDetailPage({
     <>
       <section className="border-b rule-on-dark pb-8 pt-8 sm:pt-12">
         <Container>
-          <BackToCatalogue />
+          <BackToCatalogueLink />
         </Container>
       </section>
 
@@ -73,7 +66,7 @@ export default async function TitleDetailPage({
               {title.title}
             </h1>
 
-            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3">
+            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4">
               <div>
                 <dt className="font-mono text-xs uppercase tracking-wide text-paper/45">Year</dt>
                 <dd className="mt-1 text-sm text-paper/80">{title.year}</dd>
@@ -82,16 +75,12 @@ export default async function TitleDetailPage({
                 <dt className="font-mono text-xs uppercase tracking-wide text-paper/45">Runtime</dt>
                 <dd className="mt-1 text-sm text-paper/80">{title.runtime}</dd>
               </div>
-              <div>
-                <dt className="font-mono text-xs uppercase tracking-wide text-paper/45">Rating</dt>
-                <dd className="mt-1 text-sm text-paper/80">{title.rating}</dd>
-              </div>
-              <div className="col-span-2 sm:col-span-3">
+              <div className="col-span-2">
                 <dt className="font-mono text-xs uppercase tracking-wide text-paper/45">Countries</dt>
                 <dd className="mt-1 text-sm text-paper/80">{title.countries.join(", ")}</dd>
               </div>
               {title.keywordsTags.length > 0 && (
-                <div className="col-span-2 sm:col-span-3">
+                <div className="col-span-2">
                   <dt className="font-mono text-xs uppercase tracking-wide text-paper/45">
                     Keywords
                   </dt>
@@ -101,7 +90,7 @@ export default async function TitleDetailPage({
                 </div>
               )}
               {title.subtitlesAvailable.length > 0 && (
-                <div className="col-span-2 sm:col-span-3">
+                <div className="col-span-2">
                   <dt className="font-mono text-xs uppercase tracking-wide text-paper/45">
                     Subtitles
                   </dt>
@@ -223,7 +212,7 @@ export default async function TitleDetailPage({
 
       <section className="bg-ink py-16">
         <Container className="text-center">
-          <BackToCatalogue />
+          <BackToCatalogueLink />
         </Container>
       </section>
     </>

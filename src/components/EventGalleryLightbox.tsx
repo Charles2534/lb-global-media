@@ -8,8 +8,15 @@ type Photo = {
   alt: string;
 };
 
-export function EventGalleryLightbox({ photos }: { photos: Photo[] }) {
+export function EventGalleryLightbox({ photos: photosProp }: { photos: Photo[] }) {
+  // Guard against duplicate entries reaching the gallery (same still listed
+  // twice, e.g. from a data mixup) — de-dupe by src rather than trusting callers.
+  const photos = photosProp.filter(
+    (photo, i) => photosProp.findIndex((p) => p.src === photo.src) === i
+  );
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [failedSrcs, setFailedSrcs] = useState<Set<string>>(new Set());
   const closeRef = useRef<HTMLButtonElement>(null);
 
   const isOpen = openIndex !== null;
@@ -39,25 +46,40 @@ export function EventGalleryLightbox({ photos }: { photos: Photo[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        {photos.map((photo, i) => (
-          <button
-            key={photo.src}
-            type="button"
-            onClick={() => setOpenIndex(i)}
-            aria-label={`Expand photo: ${photo.alt}`}
-            className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl"
-          >
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              fill
-              sizes="(min-width: 640px) 33vw, 100vw"
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <span className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
-          </button>
-        ))}
+      {/* flex-wrap + justify-center rather than a grid, so a gallery with
+          fewer than 3 stills centers its row instead of left-aligning with
+          dead space on the right (grid can't center a partial last row). */}
+      <div className="flex flex-wrap justify-center gap-4">
+        {photos.map((photo, i) =>
+          failedSrcs.has(photo.src) ? (
+            <div
+              key={photo.src}
+              className="flex aspect-[4/3] w-full items-center justify-center rounded-xl bg-ink-soft text-xs text-paper/40 sm:w-[calc((100%-2rem)/3)]"
+            >
+              Image unavailable
+            </div>
+          ) : (
+            <button
+              key={photo.src}
+              type="button"
+              onClick={() => setOpenIndex(i)}
+              aria-label={`Expand photo: ${photo.alt}`}
+              className="group relative aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-xl sm:w-[calc((100%-2rem)/3)]"
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="(min-width: 640px) 33vw, 100vw"
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                onError={() =>
+                  setFailedSrcs((prev) => new Set(prev).add(photo.src))
+                }
+              />
+              <span className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
+            </button>
+          )
+        )}
       </div>
 
       {isOpen && (
