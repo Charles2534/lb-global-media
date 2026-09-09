@@ -17,11 +17,10 @@ import { OCTAGON_CLIP, OctagonMedia } from "@/components/OctagonMedia";
 import { getAllTitles } from "@/lib/titles";
 import { site } from "@/lib/site";
 
-// "An Artificial Life" isn't in titles.csv yet (no slug, no poster asset) —
-// add it here once it's been added to the catalogue data.
 const featuredTitleSlugs = [
   "no-place-to-hide",
   "girls-will-be",
+  "an-artificial-life",
   "tender-resistance",
   "from-her-bones",
   "beyond-our-end",
