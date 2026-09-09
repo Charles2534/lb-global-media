@@ -17,9 +17,9 @@ import { OCTAGON_CLIP, OctagonMedia } from "@/components/OctagonMedia";
 import { getAllTitles } from "@/lib/titles";
 import { site } from "@/lib/site";
 
-// "An Artificial Life" (sci-fi compilation) isn't in the catalogue data yet —
-// swap it in for beyond-our-end once it's been added to titles.csv.
-const featuredTitleSlugs = ["from-her-bones", "tender-resistance", "beyond-our-end"];
+// "An Artificial Life" isn't in titles.csv yet (no slug, no poster asset) —
+// add it here once it's been added to the catalogue data.
+const featuredTitleSlugs = ["no-place-to-hide", "girls-will-be", "tender-resistance"];
 
 const ethos = [
   {
