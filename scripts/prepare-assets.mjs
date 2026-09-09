@@ -70,6 +70,40 @@ async function copyChromaKeyed(
   console.log(`  ${path.relative(ROOT, src)} -> ${path.relative(ROOT, dest)} (chroma-keyed transparent)`);
 }
 
+// Genuinely-transparent source that just needs its padding trimmed to a
+// tight bounding box, so the logo fills its card the same way the others do.
+async function copyTrimmed(src, dest) {
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  await sharp(src).trim().png().toFile(dest);
+  console.log(`  ${path.relative(ROOT, src)} -> ${path.relative(ROOT, dest)} (trimmed)`);
+}
+
+// Recolors near-grey (low-saturation) opaque pixels to white, leaving any
+// saturated color untouched, then trims. For logos that are genuinely
+// transparent already but ship with a dark-grey wordmark meant for a light
+// background — unreadable at that grey against our near-black site
+// background, the same problem amazon.png had but via a real alpha channel
+// this time rather than a baked-in card, so no chroma-keying needed.
+async function copyRecoloredGreyToWhite(src, dest, { greyTolerance = 12 } = {}) {
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  const { data, info } = await sharp(src).raw().toBuffer({ resolveWithObject: true });
+  const { width, height, channels } = info;
+
+  for (let i = 0; i < data.length; i += channels) {
+    if (data[i + 3] === 0) continue;
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    const isGreyish = Math.max(r, g, b) - Math.min(r, g, b) < greyTolerance;
+    if (isGreyish) {
+      data[i] = 255;
+      data[i + 1] = 255;
+      data[i + 2] = 255;
+    }
+  }
+
+  await sharp(data, { raw: { width, height, channels } }).trim().png().toFile(dest);
+  console.log(`  ${path.relative(ROOT, src)} -> ${path.relative(ROOT, dest)} (grey text recolored to white, trimmed)`);
+}
+
 console.log("Brand:");
 copy(
   path.join(MEDIA, "BRAND", "lb-global-media-gradient-1280x390.png"),
@@ -120,6 +154,23 @@ await copyChromaKeyed(
   path.join(PARTNERS, "amazon-white.png.png"),
   path.join(PUBLIC, "partners", "amazon.png"),
   { lowThreshold: 3, highThreshold: 9, featherSigma: 1 }
+);
+
+// Google Play ships with real transparency, but its wordmark is a flat dark
+// grey (~95,99,104) meant for a light background — unreadable against our
+// near-black one. The triangle icon's colors are far outside grey (each
+// channel differs by well more than 12), so recoloring only near-grey
+// pixels leaves the icon untouched.
+await copyRecoloredGreyToWhite(
+  path.join(PARTNERS, "Google-Play-Logo.png"),
+  path.join(PUBLIC, "partners", "googleplay.png")
+);
+
+// YouTube Movies already ships with a genuinely transparent background and
+// a white wordmark — no recoloring needed, just trim the padding.
+await copyTrimmed(
+  path.join(PARTNERS, "Youtube-Movies-Logo.png"),
+  path.join(PUBLIC, "partners", "youtubemovies.png")
 );
 
 console.log("Production:");

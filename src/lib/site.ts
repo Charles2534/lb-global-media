@@ -27,4 +27,6 @@ export const partners = [
   { name: "Digital Virgo", file: "digitalvirgo.webp", size: "default" },
   { name: "Hoopla", file: "hoopla.png", size: "default" },
   { name: "OTT Studio", file: "ottstudio.png", size: "lg" },
+  { name: "Google Play", file: "googleplay.png", size: "default" },
+  { name: "YouTube Movies", file: "youtubemovies.png", size: "default" },
 ] as const;
