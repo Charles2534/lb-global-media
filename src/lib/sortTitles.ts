@@ -6,11 +6,14 @@
 import type { Title } from "./titles";
 
 // Sorts newest-first. Uses the precise release_date when a title has one;
-// falls back to year (all we have today — see README-assets.md) otherwise.
+// falls back to Jan 1 of its year otherwise. Both branches must resolve to
+// a real timestamp (ms since epoch) — comparing a bare year like 2026
+// against Date.parse()'s ~1.7-trillion-ms output always loses, silently
+// sorting every year-only title to the very end regardless of its year.
+function timeOf(title: Title): number {
+  return title.releaseDate ? Date.parse(title.releaseDate) : new Date(title.year, 0, 1).getTime();
+}
+
 export function sortByReleaseDateDesc(titles: Title[]): Title[] {
-  return [...titles].sort((a, b) => {
-    const aTime = a.releaseDate ? Date.parse(a.releaseDate) : a.year;
-    const bTime = b.releaseDate ? Date.parse(b.releaseDate) : b.year;
-    return bTime - aTime;
-  });
+  return [...titles].sort((a, b) => timeOf(b) - timeOf(a));
 }
