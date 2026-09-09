@@ -176,3 +176,9 @@ export function getAllGenres(): string[] {
   }
   return Array.from(set).sort();
 }
+
+// The source data stores this token as the terse "English HOH" — display it
+// explicitly so licensors and viewers don't have to know the abbreviation.
+export function formatSubtitleLabel(token: string): string {
+  return /^english\s*hoh$/i.test(token.trim()) ? "English (Hard of Hearing)" : token;
+}

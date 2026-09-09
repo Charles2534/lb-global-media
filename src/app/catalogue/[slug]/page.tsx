@@ -6,7 +6,7 @@ import { Container } from "@/components/Container";
 import { BackToCatalogueLink } from "@/components/BackToCatalogueLink";
 import { CastCrewList } from "@/components/CastCrewList";
 import { EventGalleryLightbox } from "@/components/EventGalleryLightbox";
-import { getAllTitles, getTitleBySlug } from "@/lib/titles";
+import { formatSubtitleLabel, getAllTitles, getTitleBySlug } from "@/lib/titles";
 
 export function generateStaticParams() {
   return getAllTitles().map((t) => ({ slug: t.slug }));
@@ -95,7 +95,7 @@ export default async function TitleDetailPage({
                     Subtitles
                   </dt>
                   <dd className="mt-1 text-sm text-paper/80">
-                    {title.subtitlesAvailable.join(", ")}
+                    {title.subtitlesAvailable.map(formatSubtitleLabel).join(", ")}
                   </dd>
                 </div>
               )}
