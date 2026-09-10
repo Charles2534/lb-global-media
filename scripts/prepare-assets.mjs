@@ -343,6 +343,17 @@ function resolveTitleFolder(slug) {
   return null;
 }
 
+// Manual picks for specific titles where the default "first N alphabetically"
+// selection isn't the best set of shots — order matters (first entry becomes
+// still-1, etc). Filenames are relative to that title's Stills folder.
+const stillPicksOverrides = {
+  "no-place-to-hide": [
+    "Screenshot 2026-08-20 173544.png",
+    "Screenshot 2026-08-20 173429.png",
+    "Screenshot 2026-08-20 173619.png",
+  ],
+};
+
 function resolveStills(slug, max = 3) {
   const folder = resolveTitleFolder(slug);
   if (!folder) return [];
@@ -350,6 +361,11 @@ function resolveStills(slug, max = 3) {
   const stillsDirEntry = entries.find((e) => e.isDirectory() && /^stills?$/i.test(e.name));
   if (!stillsDirEntry) return [];
   const stillsDir = path.join(folder, stillsDirEntry.name);
+
+  if (stillPicksOverrides[slug]) {
+    return stillPicksOverrides[slug].map((name) => path.join(stillsDir, name));
+  }
+
   const files = fs
     .readdirSync(stillsDir, { withFileTypes: true })
     .filter((e) => e.isFile() && /\.(jpe?g|png|webp)$/i.test(e.name))
