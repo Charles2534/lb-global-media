@@ -53,7 +53,7 @@ const ethos = [
     icon: LeafIcon,
   },
   {
-    title: "Distribution Focussed",
+    title: "Distribution Focused",
     body: "We believe every film deserves the right audience. We don't just create a film, but help find real distribution and reach global audiences.",
     icon: BroadcastIcon,
   },
