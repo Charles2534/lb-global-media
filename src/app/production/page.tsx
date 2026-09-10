@@ -145,47 +145,39 @@ export default function ProductionPage() {
             title="A Multicultural Team, Across Three Continents"
             titleFont="mono"
           />
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper/70">
+          <p className="mt-8 text-lg leading-relaxed text-paper/70">
             Our multicultural team operates across London, Paris and Bangkok,
             supported by creative and industry relationships throughout
             Europe, Asia and Latin America.
           </p>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-paper/70">
+          <p className="mt-4 text-lg leading-relaxed text-paper/70">
             Our truly international and unique DNA makes us well-positioned
             for international media co-productions. Our international
             perspective helps us identify cross-border opportunities, connect
             complementary partners and support stories capable of resonating
             beyond their country of origin.
           </p>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-paper/70">
+          <p className="mt-4 text-lg leading-relaxed text-paper/70">
             At {site.name}, we are particularly interested in projects which
             bring fresh, authentic perspectives from under-represented voices
             around the world.
           </p>
 
           <div className="mt-12 max-w-2xl rounded-2xl border rule-on-dark bg-paper/[0.03] p-8">
-            <div className="flex items-start gap-5">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-brand font-mono text-lg font-semibold text-white">
-                WS
-              </div>
-              <div>
-                <p className="font-mono text-xl font-semibold">
-                  Weerada Sucharitkul
-                  <span className="ml-3 font-mono text-xs font-normal uppercase tracking-widest text-paper/50">
-                    Founder &amp; CEO
-                  </span>
-                </p>
-                <p className="mt-4 leading-relaxed text-paper/70">
-                  Founder and CEO Weerada Sucharitkul brings more than a
-                  decade of experience in international content acquisition
-                  and distribution. An alumna of the EAVE Ties That Bind
-                  international co-production programme, she has lived in 11
-                  countries across five continents and has a particular
-                  interest in projects connecting Asia, Europe and Latin
-                  America.
-                </p>
-              </div>
-            </div>
+            <p className="font-mono text-xl font-semibold">
+              Weerada Sucharitkul
+              <span className="ml-3 font-mono text-xs font-normal uppercase tracking-widest text-paper/50">
+                Founder &amp; CEO
+              </span>
+            </p>
+            <p className="mt-4 leading-relaxed text-paper/70">
+              Founder and CEO Weerada Sucharitkul brings more than a decade of
+              experience in international content acquisition and
+              distribution. An alumna of the EAVE Ties That Bind international
+              co-production programme, she has lived in 11 countries across
+              five continents and has a particular interest in projects
+              connecting Asia, Europe and Latin America.
+            </p>
           </div>
         </Container>
       </section>
