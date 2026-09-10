@@ -393,6 +393,13 @@ function resolveStills(slug, max = 3) {
 let titlesWithStills = 0;
 let titlesWithoutStills = [];
 for (const slug of slugs) {
+  // copy() only ever writes/overwrites by name — it never removes a
+  // destination file whose source no longer resolves to that slot (e.g. a
+  // leftover still-1.jpg from before a slug picked up a still-1.png). Clear
+  // the directory first so every run reflects exactly resolveStills' current
+  // output, not an accumulation of whatever's ever been written there.
+  fs.rmSync(path.join(PUBLIC, "titles", slug, "stills"), { recursive: true, force: true });
+
   const stillPaths = resolveStills(slug);
   if (stillPaths.length === 0) {
     titlesWithoutStills.push(slug);
