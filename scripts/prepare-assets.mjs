@@ -270,12 +270,12 @@ function firstFileIn(dir) {
 // or where multiple candidate posters exist (see README-assets.md for rationale).
 const explicitOverrides = {
   "the-first-taste": path.join(OTHER, "The First Taste_Poster 2 (Amazon).png"),
-  "love-is-never-far": path.join(OTHER, "LOVE-IS-NEVER-FAR film - 1575x2100.png"),
-  // these-untold-secrets and when-you-look-beneath-the-skin overrides removed:
-  // both posters now live in their own Other Titles/<slug>/ subfolder
-  // (alongside their new Stills folders), so the default per-slug resolution
-  // below finds them correctly — these overrides were pointing at the old
-  // flat-file locations and had gone stale.
+  // these-untold-secrets, when-you-look-beneath-the-skin, and
+  // love-is-never-far overrides removed: their posters now each live in
+  // their own Other Titles/<slug>/ subfolder (alongside new Stills
+  // folders), so the default per-slug resolution below finds them
+  // correctly — these overrides were pointing at the old flat-file
+  // locations and had gone stale.
   "before-the-dawn-breaks": path.join(OTHER, "before-the-dawn", "BEFORE-THE-DAWN-BREAKS-AMAZON-1200x1600.png"),
 };
 
@@ -354,6 +354,14 @@ const stillPicksOverrides = {
     "Screenshot 2026-08-20 173544.png",
     "Screenshot 2026-08-20 173429.png",
     "Screenshot 2026-08-20 173619.png",
+  ],
+  // Default case-sensitive alphabetical sort puts these out of numeric order
+  // ("Like the First Time - Still 2.jpg" sorts before the lowercase-l
+  // "like the first time still 1.png").
+  "like-the-first-time": [
+    "like the first time still 1.png",
+    "Like the First Time - Still 2.jpg",
+    "Like the First Time - Still 3.jpg",
   ],
 };
 
