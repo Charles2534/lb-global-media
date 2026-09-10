@@ -272,7 +272,10 @@ const explicitOverrides = {
   "the-first-taste": path.join(OTHER, "The First Taste_Poster 2 (Amazon).png"),
   "love-is-never-far": path.join(OTHER, "LOVE-IS-NEVER-FAR film - 1575x2100.png"),
   "when-you-look-beneath-the-skin": path.join(OTHER, "WYLBTS 3.2 (1200x1600).jpg"),
-  "these-untold-secrets": path.join(OTHER, "THESE-UNTOLD-SECRETS_film-poster_1200X1600.jpg"),
+  // these-untold-secrets override removed: its poster now lives in its own
+  // Other Titles/these-untold-secrets/ subfolder (alongside its new Stills
+  // folder), so the default per-slug resolution below finds it correctly —
+  // the override was pointing at the old flat-file location and had gone stale.
   "before-the-dawn-breaks": path.join(OTHER, "before-the-dawn", "BEFORE-THE-DAWN-BREAKS-AMAZON-1200x1600.png"),
 };
 
