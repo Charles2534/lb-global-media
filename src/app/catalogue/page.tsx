@@ -20,7 +20,7 @@ const catalogueGenres = [
   "Horror",
   "Drama",
   "Science Fiction",
-  "Black Cinema (coming soon)",
+  "Black Cinema",
 ];
 
 const partnerDeliverables = [
