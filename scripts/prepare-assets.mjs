@@ -269,7 +269,12 @@ function firstFileIn(dir) {
 // Explicit overrides for slugs whose asset filenames don't match the slug at all,
 // or where multiple candidate posters exist (see README-assets.md for rationale).
 const explicitOverrides = {
-  "the-first-taste": path.join(OTHER, "The First Taste_Poster 2 (Amazon).png"),
+  // Two candidate posters live in this title's folder (plus its new
+  // Stills folder) — kept as an explicit override, unlike the other
+  // slugs below, specifically to keep picking "Poster 2 (Amazon)"
+  // deterministically rather than whatever fs.readdirSync happens to
+  // return first between the two.
+  "the-first-taste": path.join(OTHER, "the-first-taste", "The First Taste_Poster 2 (Amazon).png"),
   // these-untold-secrets, when-you-look-beneath-the-skin, and
   // love-is-never-far overrides removed: their posters now each live in
   // their own Other Titles/<slug>/ subfolder (alongside new Stills
