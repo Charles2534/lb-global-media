@@ -157,7 +157,7 @@ export default function HomePage() {
               tone="paper"
               columns={3}
               showNumbers={false}
-              bodyFont='Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif'
+              bodyFont="var(--font-lato), Arial, Helvetica, sans-serif"
             />
           </div>
           <p className="font-display mt-16 max-w-3xl text-2xl leading-snug text-paper-foreground/80">
